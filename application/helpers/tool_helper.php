@@ -24,3 +24,10 @@ function ajax($code, $data, $msg)
         exit(json_encode($info));
     }
 }
+/*
+	静态资源地址
+*/
+function static_url($url)
+{
+	return base_url()."static/".$url;
+}
