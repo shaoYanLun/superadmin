@@ -1,0 +1,37 @@
+		</div>
+	</div>
+</div>
+<div class="page-footer">
+	<div class="page-footer-inner">
+		 2014 &copy; Metronic by keenthemes.
+	</div>
+	<div class="scroll-to-top">
+		<i class="icon-arrow-up"></i>
+	</div>
+</div>
+<!-- END FOOTER -->
+<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+<!-- BEGIN CORE PLUGINS -->
+<!--[if lt IE 9]>
+<script src="<?=static_url('global/plugins/respond.min.js')?>"></script>
+<script src="<?=static_url('global/plugins/excanvas.min.js')?>"></script> 
+<![endif]-->
+<script src="<?=static_url('global/plugins/jquery.min.js')?>" type="text/javascript"></script>
+<!-- jquery 版本兼容 -->
+<script src="<?=static_url('global/plugins/jquery-migrate.min.js')?>" type="text/javascript"></script> 
+<script src="<?=static_url('global/plugins/bootstrap/js/bootstrap.min.js')?>" type="text/javascript"></script>
+<script src="<?=static_url('global/plugins/jquery-slimscroll/jquery.slimscroll.min.js')?>" type="text/javascript"></script>
+<!-- END CORE PLUGINS -->
+<script src="<?=static_url('global/js/metronic.js')?>" type="text/javascript"></script>
+<script src="<?=static_url('pages/js/quick-sidebar.js')?>" type="text/javascript"></script>
+<script src="<?=static_url('pages/js/layout.js')?>" type="text/javascript"></script>
+
+<script>
+jQuery(document).ready(function() {
+	Layout.init(); // init current layout
+   	Metronic.init(); // init metronic core components
+	QuickSidebar.init(); // init quick sidebar
+});
+</script>
+</body>
+</html>
