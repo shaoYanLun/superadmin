@@ -1,10 +1,12 @@
 <?php
+
 function c($item, $config = 'custom')
 {
     $ci = & get_instance();
     $ci->config->load($config);
     return $ci->config->item($item);
 }
+
 /*
  * 接口返回数据
  */
@@ -24,10 +26,35 @@ function ajax($code, $data, $msg)
         exit(json_encode($info));
     }
 }
+
 /*
-	静态资源地址
-*/
+ * 静态资源地址
+ */
 function static_url($url)
 {
-	return base_url()."static/".$url;
+    return base_url() . "static/" . $url;
+}
+
+/**
+ * 登录加密方式，可以使用更安全的password_hash
+ *
+ * @param unknown $pwd
+ * @param unknown $salt
+ * @return string
+ */
+function password($pwd, $salt)
+{
+    $pwd = sha1($pwd . $salt);
+    return $pwd;
+}
+
+function gconfig($ckey)
+{
+    $ci = & get_instance();
+    $ci->load->model("Config_model");
+    $config = Config_model::getPlatConfig();
+    if (! isset($config[$ckey])) {
+        return "";
+    }
+    return $config[$ckey];
 }
