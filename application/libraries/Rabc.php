@@ -19,6 +19,9 @@ class Rabc{
 	}
 	/*
 		获取左侧导航目录
+		return 
+			arrmenu
+			current
 	*/
 	function getMenu()
 	{
@@ -29,11 +32,29 @@ class Rabc{
 		$arrMenuList = $CI->Manage_model->getMenu();
 
 		$arrRes = array();
+		$arrCurent = array(
+			'mname'=>'',
+			'desription'=>'',
+			'url'=>'',
+			'parent' =>'',
+		);
+
+        $atfunc = $CI->router->fetch_class()."/".$CI->router->fetch_method();
 
 		if(!empty($arrMenuList))
 		{
 			$arrLinkMenu = array();
 			foreach ($arrMenuList as $key => $arrMenu) {
+
+				if($arrMenu['url'] == $atfunc)
+				{
+					$arrCurent = array(
+						'mname'=>$arrMenu['mname'],
+						'desription'=>$arrMenu['desription'],
+						'url'=>$arrMenu['url'],
+						'parent' =>$arrMenu['parent'],
+					);
+				}
 
 				!isset($arrLinkMenu[$arrMenu['id']])?$arrLinkMenu[$arrMenu['id']]=array():"";
 
@@ -47,6 +68,9 @@ class Rabc{
 			}
 		}
 
-		return $arrRes;
+		return array(
+			"arrmenu"=>$arrRes,
+			"current"=>$arrCurent,
+		);
 	}
 }

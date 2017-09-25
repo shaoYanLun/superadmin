@@ -108,14 +108,14 @@
 					</form>
 				</li>
 				<?php
-				if(!empty($menulist))
+				if(!empty($_menulist))
 				{
 					$start = 0;
 
-					foreach ($menulist as $menu) {
+					foreach ($_menulist as $menu) {
 						if(empty($menu['_list']))
 						{
-							$active = $menu['url']==$atfunc?"active":"";
+							$active = $menu['url']==$_atfunc?"active":"";
 				?>
 				<li class="<?php echo $active;?>">
 					<a href="/<?php echo $menu['url'];?>">
@@ -127,8 +127,11 @@
 				<?php
 						}else
 						{
+							foreach ($menu['_list'] as $v) {
+								$active = $v['url']==$_atfunc?" active open ":"";
+							}
 				?>
-				<li class="/<?php echo $start==0?"start":"";?>">
+				<li class="<?php echo $start==0?"start":"";?> <?php echo $active;?>">
 					<a href="javascript:;">
 					<i class="<?php echo $menu['icon'];?>"></i>
 					<span class="title"><?php echo $menu['mname'];?></span>
@@ -137,7 +140,7 @@
 					<ul class="sub-menu">
 						<?php
 							foreach ($menu['_list'] as $v) {
-								$active = $v['url']==$atfunc?"active":"";
+								$active = $v['url']==$_atfunc?"active":"";
 						?>
 						<li class="<?php echo $active;?>">
 							<a href="/<?php echo $v['url'];?>">

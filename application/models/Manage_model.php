@@ -13,9 +13,28 @@ class Manage_model extends CI_Model
 		}
 	}
 
-	function getManageUserByWhere( $arrWhere = array() )
+	function getManageUserByWhere( $arr = array() )
 	{
-		return $this->_db->get_where($this->_strUser , $arrWhere)->result_array();
+		$sql = " select * from {$this->_strUser} where 1=1 ";
+		$sqlNum = " select count(*) as num from {$this->_strUser} where 1=1 ";
+
+		$arrWhere = array();
+		$arrWhereNum = array();
+
+		if(isset($arr['ls']))
+		{
+			$sql.=" limit ? , ?";
+			$arrWhere[] = $arr['ls'];
+			$arrWhere[] = $arr['le'];
+		}
+
+		$list = $this->_db->query($sql , $arrWhere)->result_array();
+		$arrCount = $this->_db->query($sqlNum , $arrWhereNum)->row_array();
+
+		return array(
+			'list'=>$list,
+			'num'=>$arrCount['num']
+			);
 	}
 
 	function getMenu()
