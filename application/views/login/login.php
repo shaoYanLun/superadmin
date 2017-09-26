@@ -78,13 +78,13 @@ License: You must have a valid license purchased only from themeforest(the above
 			<button type="submit" class="btn btn-primary btn-block uppercase">Login</button>
 		</div>
 		<div class="form-actions">
-			<div class="pull-left">
+			<!--  <div class="pull-left">
 				<label class="rememberme check">
 				<input type="checkbox" name="remember" value="1"/>Remember me </label>
 			</div>
 			<div class="pull-right forget-password-block">
 				<a href="javascript:;" id="forget-password" class="forget-password">Forgot Password?</a>
-			</div>
+			</div>-->
 		</div>
 	</form>
 	<!-- END LOGIN FORM -->
@@ -130,12 +130,12 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- END PAGE LEVEL PLUGINS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script src="<?=static_url('global/js/metronic.js')?>" type="text/javascript"></script>
-<script src="<?=static_url('pages/js/login.js')?>" type="text/javascript"></script>
+<!--<script src="<?=static_url('pages/js/login.js')?>" type="text/javascript"></script>-->
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
 jQuery(document).ready(function() {     
 	Metronic.init(); // init metronic core components
-	Login.init();
+	//Login.init();
 });
 </script>
 <!-- END JAVASCRIPTS -->

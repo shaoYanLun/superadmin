@@ -9,6 +9,11 @@ class Auth extends MY_Controller
         parent::__construct();
     }
 
+    function index()
+    {
+        $this->load->view("login/login");
+    }
+
     function login()
     {
         $this->load->library('session');
