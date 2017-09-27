@@ -13,6 +13,10 @@ class MY_Controller extends CI_Controller
 
     function init()
     {
-        
+        $userInfo = checkLogin();
+        if (! $userInfo) {
+            redirect("/auth/index");
+        }
+        return $userInfo;
     }
 }

@@ -34,7 +34,8 @@ class User_model extends CI_Model
         
         $ci = &get_instance();
         $ci->load->library('session');
-        $ci->session->set_userdata($sess);
+        
+        $ci->session->set_userdata('user_info', $sess);
         return $sess;
     }
 

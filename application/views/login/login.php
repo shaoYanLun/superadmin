@@ -55,7 +55,6 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- BEGIN LOGIN -->
 <div class="content">
 	<!-- BEGIN LOGIN FORM -->
-	<form class="login-form" action="index.html" method="post">
 		<div class="form-title">
 			<span class="form-title">Welcome.</span>
 			<span class="form-subtitle">Please login.</span>
@@ -67,13 +66,24 @@ License: You must have a valid license purchased only from themeforest(the above
 		</div>
 		<div class="form-group">
 			<!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
-			<label class="control-label visible-ie8 visible-ie9">Username</label>
+			<label class="control-label visible-ie8 visible-ie9">用户名</label>
 			<input class="form-control form-control-solid placeholder-no-fix" type="text" autocomplete="off" placeholder="Username" name="username"/>
 		</div>
 		<div class="form-group">
-			<label class="control-label visible-ie8 visible-ie9">Password</label>
+			<label class="control-label visible-ie8 visible-ie9">密码</label>
 			<input class="form-control form-control-solid placeholder-no-fix" type="password" autocomplete="off" placeholder="Password" name="password"/>
 		</div>
+		<?php
+
+if ($isDis) :
+    ?>
+		<div class="form-group">
+			<label class="control-label visible-ie8 visible-ie9">验证码</label>
+			<input class="form-control form-control-solid placeholder-no-fix" style='width:50%' type="password" autocomplete="off" placeholder="code" name="code"/>
+		</div>
+		<?php endif;
+
+?>
 		<div class="form-actions">
 			<button type="submit" class="btn btn-primary btn-block uppercase">Login</button>
 		</div>
@@ -86,13 +96,12 @@ License: You must have a valid license purchased only from themeforest(the above
 				<a href="javascript:;" id="forget-password" class="forget-password">Forgot Password?</a>
 			</div>-->
 		</div>
-	</form>
 	<!-- END LOGIN FORM -->
 	<!-- BEGIN FORGOT PASSWORD FORM -->
 	<form class="forget-form" action="index.html" method="post">
 		<div class="form-title">
 			<span class="form-title">Forget Password ?</span>
-			<span class="form-subtitle">Enter your e-mail to reset it.</span>
+			<span class="form-subtitle" id="errormsg"></span>
 		</div>
 		<div class="form-group">
 			<input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Email" name="email"/>
@@ -130,12 +139,63 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- END PAGE LEVEL PLUGINS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script src="<?=static_url('global/js/metronic.js')?>" type="text/javascript"></script>
-<!--<script src="<?=static_url('pages/js/login.js')?>" type="text/javascript"></script>-->
+<script src="<?=static_url('global/js/md5.min.js')?>" type="text/javascript"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
 jQuery(document).ready(function() {     
 	Metronic.init(); // init metronic core components
 	//Login.init();
+});
+
+$(function(){
+	$("button[type='submit']").bind("click",function(){
+		var param= GetRequest();
+		$go = param['go']?param['go']:"/";
+
+		if( $("input[name='username']").val()=='' || $("input[name='password']").val()==''){
+			alert("密码或账户不能为空");
+		}else{
+			$.ajax({
+				type:'post',
+                url:'/auth/login',
+				dataType:'json',				
+				data:{
+					uname:$("input[name='username']").val(),
+					pwd:md5($("input[name='password']").val()),
+					code:$("input[name='code']").val()
+				},
+				success:function (result){					
+					if(result.code==1){
+						window.location.href=$go;
+					}else{
+						alert(result.msg);
+					}
+				},
+				error:function(){
+					alert('error');
+					
+				}
+			});
+		}
+	});
+
+	$(document).keydown(function(event){
+		if(event.keyCode==13){
+			$("button[type='submit']").click();
+	    }
+	})
+	function GetRequest() { 
+		var url = location.search; //获取url中"?"符后的字串 
+		var theRequest = new Object(); 
+		if (url.indexOf("?") != -1) { 
+		var str = url.substr(1); 
+		strs = str.split("&"); 
+		for(var i = 0; i < strs.length; i ++) { 
+		theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]); 
+		} 
+		} 
+		return theRequest; 
+		} 
 });
 </script>
 <!-- END JAVASCRIPTS -->

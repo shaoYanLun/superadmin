@@ -1,7 +1,27 @@
 <?php
 if (! defined('BASEPATH'))
     exit('No direct script access allowed');
+if (! function_exists('checkLogin')) {
 
+    /**
+     * 用户登录相关
+     */
+    function checkLogin($mutk = null)
+    {
+        if (! empty($mutk)) {
+            session_id($mutk);
+        }
+        
+        $ci = & get_instance();
+        $ci->load->library('session');
+        $user_session = $ci->session->userdata('user_info');
+        if (isset($user_session)) {
+            return $user_session;
+        } else {
+            return false;
+        }
+    }
+}
 if (! function_exists('checkRight')) {
 
     /**

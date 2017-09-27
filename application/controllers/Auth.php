@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Auth extends MY_Controller
+class Auth extends CI_Controller
 {
 
     function __construct()
@@ -11,15 +11,20 @@ class Auth extends MY_Controller
 
     function index()
     {
-        $this->load->view("login/login");
+        if (checkLogin()) {
+            // redirect('/');
+        }
+        $lcode = gconfig("login_code");
+        $data['isDis'] = false;
+        if ($lcode == 1) {
+            $data['isDis'] = true;
+        }
+        $this->load->view("login/login", $data);
     }
 
     function login()
     {
         $this->load->library('session');
-        if ($this->session->userdata('uname')) {
-            redirect('/');
-        }
         $uname = $this->input->post("uname", true);
         $pwd = $this->input->post("pwd", true);
         $code = $this->input->post("code", true);
@@ -37,10 +42,12 @@ class Auth extends MY_Controller
         $this->load->model("User_model");
         // 此处可以用redis加入防刷机制
         $user = $this->User_model->getUserByName($uname);
+        
         if (! $user || ! isset($user['salt']) || ! isset($user['password']) || password($pwd, $user['salt']) != $user['password']) {
             ajax(- 2, null, "用户名或者密码错误");
         }
         $this->User_model->wsession($user);
+        
         ajax(1, null, "OK");
     }
 }
