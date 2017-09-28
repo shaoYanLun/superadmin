@@ -128,7 +128,7 @@
 						}else
 						{
 							foreach ($menu['_list'] as $v) {
-								$active = $v['url']==$_atfunc?" active open ":"";
+								$v['url']==$_atfunc&&empty($active)?$active = " active open ":"";
 							}
 				?>
 				<li class="<?php echo $start==0?"start":"";?> <?php echo $active;?>">

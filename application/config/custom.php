@@ -16,4 +16,10 @@ $config['table_desc'] = array(
 		),
 		
 	),
+	'plat_menu'=>array(
+		'status'=>array(
+			'1'=>'显示',
+			'2'=>'不显示',
+		),
+	),
 );
