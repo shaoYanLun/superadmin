@@ -19,6 +19,7 @@
 <link href="<?=static_url('global/plugins/bootstrap/css/bootstrap.min.css');?>" rel="stylesheet" type="text/css"/>
 <link href="<?=static_url('global/css/components.min.css')?>" id="style_components" rel="stylesheet" type="text/css"/>
 <link href="<?=static_url('pages/css/layout.css')?>" rel="stylesheet" type="text/css"/>
+<script src="<?=static_url('global/plugins/jquery.min.js')?>" type="text/javascript"></script>
 <link id="style_color" href="<?=static_url('pages/css/themes/default.css')?>" rel="stylesheet" type="text/css"/>
 <!-- END THEME STYLES -->
 <link rel="shortcut icon" href="favicon.ico"/>
@@ -108,56 +109,89 @@
 					</form>
 				</li>
 				<?php
-				if(!empty($_menulist))
-				{
-					$start = 0;
-
-					foreach ($_menulist as $menu) {
-						if(empty($menu['_list']))
-						{
-							$active = $menu['url']==$_atfunc?"active":"";
-				?>
-				<li class="<?php echo $active;?>">
-					<a href="/<?php echo $menu['url'];?>">
-					<i class="<?php echo $menu['icon'];?>"></i>
+    if (! empty($_menulist)) {
+        $start = 0;
+        
+        foreach ($_menulist as $menu) {
+            if (empty($menu['_list'])) {
+                $active = $menu['url'] == $_atfunc ? "active" : "";
+                ?>
+				<li class="<?php
+                
+echo $active;
+                ?>">
+					<a href="/<?php
+                
+echo $menu['url'];
+                ?>">
+					<i class="<?php
+                
+echo $menu['icon'];
+                ?>"></i>
 					<span class="title">
-					<?php echo $menu['mname'];?> </span>
+					<?php
+                
+echo $menu['mname'];
+                ?> </span>
 					</a>
 				</li>
 				<?php
-						}else
-						{
-							foreach ($menu['_list'] as $v) {
-								$v['url']==$_atfunc&&empty($active)?$active = " active open ":"";
-							}
-				?>
-				<li class="<?php echo $start==0?"start":"";?> <?php echo $active;?>">
+            } else {
+                foreach ($menu['_list'] as $v) {
+                    $v['url'] == $_atfunc && empty($active) ? $active = " active open " : "";
+                }
+                ?>
+				<li class="<?php
+                
+echo $start == 0 ? "start" : "";
+                ?> <?php
+                
+echo $active;
+                ?>">
 					<a href="javascript:;">
-					<i class="<?php echo $menu['icon'];?>"></i>
-					<span class="title"><?php echo $menu['mname'];?></span>
+					<i class="<?php
+                
+echo $menu['icon'];
+                ?>"></i>
+					<span class="title"><?php
+                
+echo $menu['mname'];
+                ?></span>
 					<span class="arrow "></span>
 					</a>
 					<ul class="sub-menu">
 						<?php
-							foreach ($menu['_list'] as $v) {
-								$active = $v['url']==$_atfunc?"active":"";
-						?>
-						<li class="<?php echo $active;?>">
-							<a href="/<?php echo $v['url'];?>">
-							<i class="<?php echo $v['icon'];?>"></i>
-							<?php echo $v['mname'];?></a>
+                foreach ($menu['_list'] as $v) {
+                    $active = $v['url'] == $_atfunc ? "active" : "";
+                    ?>
+						<li class="<?php
+                    
+echo $active;
+                    ?>">
+							<a href="/<?php
+                    
+echo $v['url'];
+                    ?>">
+							<i class="<?php
+                    
+echo $v['icon'];
+                    ?>"></i>
+							<?php
+                    
+echo $v['mname'];
+                    ?></a>
 						</li>
 						<?php
-							}
-						?>
+                }
+                ?>
 					</ul>
 				</li>
 				<?php
-						}
-						$start++;
-					}
-				}
-				?>
+            }
+            $start ++;
+        }
+    }
+    ?>
 			</ul>
 		</div>
 	</div>

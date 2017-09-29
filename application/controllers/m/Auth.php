@@ -11,9 +11,6 @@ class Auth extends CI_Controller
 
     function index()
     {
-        if (checkLogin()) {
-            // redirect('/');
-        }
         $lcode = gconfig("login_code");
         $data['isDis'] = false;
         if ($lcode == 1) {
@@ -49,5 +46,16 @@ class Auth extends CI_Controller
         $this->User_model->wsession($user);
         
         ajax(1, null, "OK");
+    }
+
+    function logout()
+    {
+        $this->load->library('session');
+        $arrUserInfo = $this->session->userdata('user_info');
+        
+        $this->session->unset_userdata('user_info');
+        session_destroy();
+        
+        gor("OK");
     }
 }

@@ -157,7 +157,7 @@ $(function(){
 		}else{
 			$.ajax({
 				type:'post',
-                url:'/auth/login',
+                url:'/m/auth/login',
 				dataType:'json',				
 				data:{
 					uname:$("input[name='username']").val(),

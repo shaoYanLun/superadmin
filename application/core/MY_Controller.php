@@ -15,7 +15,7 @@ class MY_Controller extends CI_Controller
     {
         $userInfo = checkLogin();
         if (! $userInfo) {
-            redirect("/auth/index");
+            redirect("/m/auth/index");
         }
         return $userInfo;
     }
