@@ -98,7 +98,7 @@ if ($isDis) :
 		</div>
 	<!-- END LOGIN FORM -->
 	<!-- BEGIN FORGOT PASSWORD FORM -->
-	<form class="forget-form" action="index.html" method="post">
+	<form class="forget-form"  method="post">
 		<div class="form-title">
 			<span class="form-title">Forget Password ?</span>
 			<span class="form-subtitle" id="errormsg"></span>
@@ -166,6 +166,7 @@ $(function(){
 				},
 				success:function (result){					
 					if(result.code==1){
+						console.log($go);
 						window.location.href=$go;
 					}else{
 						alert(result.msg);

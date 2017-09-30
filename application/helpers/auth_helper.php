@@ -28,10 +28,11 @@ if (! function_exists('checkRight')) {
      * 简要说明
      * checkRight 主要用于对页面或者功能部分判断是否有权限操作的的时候使用，如botton是否有权限显示与不显示
      *
-     * @param unknown $right
+     * @param unknown $right:right
+     *            为空时，只有管理员和超级管理有权限，right=superadmin=>只有超级管理员有权限
      * @return boolean
      */
-    function checkRight($right)
+    function checkRight($right = '')
     {
         $ci = & get_instance();
         if ($ci->rabc->check($right)) {
@@ -46,9 +47,10 @@ if (! function_exists('checkRightPage')) {
     /**
      * 简要说明
      *
-     * @param unknown $right
+     * @param unknown $right:right
+     *            为空时，只有管理员和超级管理有权限，right=superadmin=>只有超级管理员有权限
      */
-    function checkRightPage($right)
+    function checkRightPage($right = '')
     {
         header("Content-type:text/html;charset=utf-8");
         $ci = & get_instance();

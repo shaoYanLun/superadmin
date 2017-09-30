@@ -21,6 +21,36 @@ class User_model extends CI_Model
         }
     }
 
+    function addUser($arr)
+    {
+        $uname = $arr['uname'];
+        $user = $this->getUserByName($uname);
+        if ($user) {
+            return array(
+                "code" => 2,
+                "msg" => "用户名已经存在"
+            );
+        }
+        $insertData['username'] = $uname;
+        $insertData['nick_name'] = $arr['nick_name'];
+        $insertData['salt'] = getRand(16);
+        $insertData['password'] = password($arr['pwd'], $insertData['salt']);
+        $insertData['gcode'] = mt_rand(10000000, 99999999);
+        $insertData['ctime'] = date("Y-m-d H:i:s");
+        $insertData['mtime'] = date("Y-m-d H:i:s");
+        $isS = $this->_db->insert($this->_strUser, $insertData);
+        if (! $isS) {
+            return array(
+                "code" => - 1,
+                "msg" => "添加用户失败"
+            );
+        }
+        return array(
+            "code" => 1,
+            "msg" => "添加用户成功"
+        );
+    }
+
     function wsession($user)
     {
         $level = $user['user_level'];
@@ -68,6 +98,12 @@ class User_model extends CI_Model
             "username" => $name
         ))->row_array();
         return $user;
+    }
+
+    function updateUser($data, $where)
+    {
+        $ret = $this->_db->update($this->_strUser, $data, $where);
+        return $ret;
     }
 
     function getPlatConfig()

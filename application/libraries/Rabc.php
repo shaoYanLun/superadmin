@@ -19,6 +19,10 @@ class Rabc
             return true;
         }
         
+        if ($a == "") {
+            return false;
+        }
+        
         $arrRight = json_decode($right, true);
         if (! in_array($a, $arrRight)) {
             return false;

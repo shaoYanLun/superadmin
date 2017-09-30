@@ -23,7 +23,8 @@ function ajax($code, $data, $msg)
     } else {
         // json
         header('Content-Type: application/json;charset=utf-8');
-        exit(json_encode($info));
+        echo json_encode($info);
+        exit();
     }
 }
 
@@ -46,6 +47,35 @@ function password($pwd, $salt)
 {
     $pwd = sha1($pwd . $salt);
     return $pwd;
+}
+
+/**
+ * 生成随机数
+ * isup：是否含有大写
+ */
+function getRand($length = 10, $isup = false, $max = false)
+{
+    if (is_int($max) && $max > $length) {
+        $length = mt_rand($length, $max);
+    }
+    $output = '';
+    
+    for ($i = 0; $i < $length; $i ++) {
+        if ($isup) {
+            $which = mt_rand(0, 2);
+        } else {
+            $which = mt_rand(0, 1);
+        }
+        
+        if ($which === 0) {
+            $output .= mt_rand(0, 9);
+        } elseif ($which === 1) {
+            $output .= chr(mt_rand(97, 122));
+        } else {
+            $output .= chr(mt_rand(65, 90));
+        }
+    }
+    return $output;
 }
 
 function gconfig($ckey)
