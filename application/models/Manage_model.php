@@ -64,9 +64,15 @@ class Manage_model extends CI_Model
 	{
 		$arrInsert['ctime'] = date("Y-m-d H:i:s" ,time());
 		$arrInsert['mtime'] = date("Y-m-d H:i:s" ,time());
-		return $this->_db->insert($this->_strPlatMenu , $arrInsert);
+		$this->_db->insert($this->_strPlatMenu , $arrInsert);
+		return $this->_db->insert_id();
 	}
-
+	//修改目录
+	function EditMenu($arrEdit , $arrWhere)
+	{
+		$arrEdit['mtime'] = date("Y-m-d H:i:s");
+		return $this->_db->update($this->_strPlatMenu , $arrEdit , $arrWhere);
+	}
 	//删除目录
 	function deleteMenuByWhere($arr)
 	{

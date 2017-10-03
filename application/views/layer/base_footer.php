@@ -26,8 +26,7 @@
 <script src="<?=static_url('pages/js/quick-sidebar.js')?>" type="text/javascript"></script>
 <script src="<?=static_url('pages/js/layout.js')?>" type="text/javascript"></script>
 <script src="<?=static_url('js/func.js')?>" type="text/javascript"></script>
-<script src="<?=static_url('js/ajax.js')?>" type="text/javascript"></script>
-
+<script src="<?=static_url('js/manage.js')?>" type="text/javascript"></script>
 <script>
 jQuery(document).ready(function() {
 	Layout.init(); // init current layout

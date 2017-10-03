@@ -14,24 +14,23 @@
 	<div class="col-md-4">
 		<div class="alert alert-success">
 			<strong>一级目录管理</strong>
-			<a data-toggle="modal" class="btn btn-xs green pull-right" href="#addfirstmenu">
+			<a class="btn btn-xs green pull-right first_menu" href="#">
 				<i class="fa fa-plus"></i> 添加一级目录 
 			</a>
 		</div>
-		<ul class="ver-inline-menu tabbable margin-bottom-10">
+		<ul class="ver-inline-menu tabbable margin-bottom-10 firstmenulist">
 			<?php
-			if(!empty($_menulist))
+			if(!empty($menulist))
 			{
 				$active = true;
-				foreach ($_menulist as $menu) {
+				foreach ($menulist as $menu) {
 			?>
 			<li class='<?php echo $active?"active":"";?>'>
 				<a data-toggle="tab" aname="<?php echo $menu['mname'];?>" aid="<?php echo $menu['id'];?>" href="#tab_<?php echo $menu['id'];?>" aria-expanded="true">
-					<i style="top:0px" class="<?php echo $menu['icon'];?>"></i> <?php echo $menu['mname'];?>
-
-					<i style="top:0px" class="icon-plus pull-right" title="添加子目录"></i>
-					<i style="top:0px" class="icon-trash pull-right delete_first_menu" title="删除当前目录"></i>
-					<i style="top:0px" class="icon-note pull-right edit_first_menu" title="修改当前目录"></i> 
+					<i style="top:0px" class="<?php echo $menu['icon'];?>"></i> <span><?php echo $menu['mname'];?></span>
+					<i style="top:0px" class="icon-plus pull-right add_second_menu popovers" data-content="没有子目录自动作为访问目录，拥有子目录自动作为分类目录" data-original-title="添加子目录" data-container="body" data-trigger="hover"></i>
+					<i style="top:0px" class="icon-trash pull-right delete_first_menu popovers" data-content="拥有子目录时，无法删除。自动删除已配置权限" data-original-title="删除当前目录" data-container="body" data-trigger="hover"></i>
+					<i style="top:0px" class="icon-note pull-right first_menu" title="修改当前目录"></i> 
 				</a>
 				<span class='<?php echo $active?"after":"";?>'>
 				</span>
@@ -49,7 +48,7 @@
 		</div>
 		<div class="tab-content">
 			<?php
-			if(!empty($_menulist))
+			if(!empty($menulist))
 			{
 				$arrStyle = array(
 					"default",
@@ -58,7 +57,7 @@
 					"danger",
 				);
 				$active = true;
-				foreach ($_menulist as $menu) {
+				foreach ($menulist as $menu) {
 			?>
 			<div id="tab_<?php echo $menu['id'];?>" class="tab-pane <?php echo $active?"active":"";?>">
 				<?php
@@ -67,31 +66,25 @@
 					$arrStatus = c("table_desc")['plat_menu']['status'];
 					foreach ($menu['_list'] as $v) {
 				?>
-				<div class="alert alert-info " style="padding: 0px;overflow: hidden;">
+				<div class="alert alert-info " style="padding: 0px;overflow: hidden;"  aname="<?php echo $v['mname'];?>" aid="<?php echo $v['id'];?>" >
 					<span style="position: relative;top: 8px;padding-left:5px;">
 						<i class="<?php echo $v['icon'];?>"></i> <?php echo trim($v['mname']);?>
 					</span>
-
-					<a href="#" class="btn purple-plum pull-right" title="添加权限" style="margin-left: 5px;">
+					<a href="#" class="btn purple-plum pull-right add_action_menu" title="添加权限" style="margin-left: 5px;">
 						<i class="fa fa-plus"></i> 添加
 					</a>
-					
-					<a href="#" class="btn red-sunglo pull-right" title="删除当前目录" style="margin-left: 5px;">
+					<a href="#" class="btn red-sunglo pull-right delete_first_menu" title="删除目录" style="margin-left: 5px;">
 						<i class="fa fa-trash-o"></i> 删除
 					</a>
-					<a href="#" class="btn btn-primary pull-right" title="修改当前目录" style="margin-left: 5px;">
+					<a href="#" class="btn btn-primary pull-right edit_second_menu" title="修改当前目录" style="margin-left: 5px;">
 						<i class="fa fa-edit" ></i> 修改
 					</a>
-					
 				</div>
-
-
 				<table class="table table-hover">
 					<thead>
 						<tr>
 							<th>权限名称</th>
 							<th>权限别名</th>
-							<th>状态</th>
 							<th>操作</th>
 						</tr>
 					</thead>
@@ -99,7 +92,6 @@
 						<tr>
 							<td>当前目录权限</td>
 							<td><?php echo $v['action'];?></td>
-							<td><?php echo empty($arrStatus[$v['status']])?"异常":$arrStatus[$v['status']] ;?></td>
 							<td></td>
 						</tr>
 						<?php
@@ -110,10 +102,8 @@
 						<tr>
 							<td><?php echo $action['mname'];?></td>
 							<td><?php echo $action['action'];?></td>
-							<td><?php echo empty($arrStatus[$action['status']])?"异常":$arrStatus[$action['status']];?></td>
-							<td>
-								<button class="btn btn-xs btn-success">修改</button>
-								<button class="btn btn-xs btn-danger">删除</button>
+							<td aid="<?php echo $action['id'];?>"  aname="<?php echo $action['mname'];?>">
+								<button class="btn btn-xs btn-danger delete_first_menu">删除</button>
 							</td>
 						</tr>
 						<?php
@@ -126,12 +116,16 @@
 					}
 				}else{
 				?>
+				<div aname="<?php echo $menu['mname'];?>" aid="<?php echo $menu['id'];?>" >
+					<a href="#" class="btn purple-plum pull-right add_action_menu" title="添加权限" style="margin-left: 5px;">
+						<i class="fa fa-plus"></i> 添加
+					</a>
+				</div>
 				<table class="table table-hover">
 					<thead>
 						<tr>
 							<th>权限名称</th>
 							<th>权限别名</th>
-							<th>状态</th>
 							<th>操作</th>
 						</tr>
 					</thead>
@@ -139,9 +133,24 @@
 						<tr>
 							<td>当前目录权限</td>
 							<td><?php echo $menu['action'];?></td>
-							<td><?php echo empty($arrStatus[$menu['status']])?"异常":$arrStatus[$menu['status']] ;?></td>
 							<td></td>
 						</tr>
+						<?php
+						if(!empty($actionlist[$menu['id']]))
+						{
+							foreach ($actionlist[$menu['id']] as  $action) {
+						?>
+						<tr>
+							<td><?php echo $action['mname'];?></td>
+							<td><?php echo $action['action'];?></td>
+							<td aid="<?php echo $action['id'];?>"  aname="<?php echo $action['mname'];?>">
+								<button class="btn btn-xs btn-danger delete_first_menu">删除</button>
+							</td>
+						</tr>
+						<?php
+							}
+						}
+						?>
 					</tbody>
 				</table>
 				<?php
@@ -158,78 +167,8 @@
 	</div>
 </div>
 <div name="modals">
-	<!-- 添加一级目录弹窗 -->
-	<div class="modal fade" id="addfirstmenu" tabindex="-1" role="basic" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-					<h4 class="modal-title">添加一级目录</h4>
-				</div>
-				<div class="alert alert-warning" style="padding: 14px;">
-					一级目录如果没有子目录，则作为访问目录。
-					如果有子目录，则作为分类目录，被设置的权限失效
-				</div>
-				<div id="addfirstmenuerrormsg">
-					
-				</div>
-				
-				<div class="modal-body form-horizontal">
-
-					<div class="form-body">
-						<div class="form-group">
-							<label class="col-md-3 control-label">目录名</label>
-							<div class="col-md-9">
-								<input type="text" name="mname" class="form-control input-inline input-medium" placeholder="目录展示名 必填">
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-md-3 control-label">访问地址</label>
-							<div class="col-md-9">
-								<input type="text" name="url" class="form-control input-inline input-medium" placeholder="格式 class/function">
-								<span class="help-inline">拥有子目录的一级目录不填写</span>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-md-3 control-label">权限别名</label>
-							<div class="col-md-9">
-								<input type="text" name="action" class="form-control input-inline input-medium" placeholder="不建议填写">
-								<span class="help-inline">不建议填写，默认与访问地址相同</span>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-md-3 control-label">图标</label>
-							<div class="col-md-9" style="padding-top: 9px;">
-								<input type="text" name="icon" class="form-control input-inline input-medium" placeholder="eg: icon-home" style="display: none;">
-								<a data-toggle="modal" href="#fullicon" class="btn btn-xs btn-success">选择图标</a>
-								<span style="margin-left: 10px;position: relative;top: 2px;" aria-hidden="true" id="menu_icon_choose" class=""></span>
-								<br/>
-								<span class="help-inline">窄屏时只展示图标 可选图标</span>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-md-3 control-label">是否显示</label>
-							<div class="col-md-9">
-								<div class="radio-list">
-									<label class="radio-inline">
-									<div class=""><span class="checked"><input type="radio" name="status" value="1" checked ></span></div> 显示 </label>
-									<label class="radio-inline">
-									<div class=""><span class=""><input type="radio" name="status" value="2"></span></div> 隐藏 </label>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn default" data-dismiss="modal">放弃</button>
-					<button type="button" class="btn blue save">保存</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- 修改一级目录 -->
-	<a style="display: none;" data-toggle="modal" href="#editfirstmenu" id="editfirstmenubutton">修改目录</a>
-	<div class="modal fade" id="editfirstmenu" tabindex="-1" role="basic" aria-hidden="true">
+	<!-- 添加修改一级目录 -->
+	<div class="modal fade" id="firstmenu" tabindex="-1" role="basic" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -239,7 +178,7 @@
 				<div class="alert alert-warning" style="padding: 14px;">
 					权限别名若已被使用在项目中，修改将导致原权限限制失效
 				</div>
-				<div id="editfirstmenuerrormsg">
+				<div class="errormsg">
 				</div>
 				<div class="modal-body form-horizontal">
 					<input type="" name="id" style="display: none;">
@@ -264,12 +203,12 @@
 								<span class="help-inline">不建议填写，默认与访问地址相同</span>
 							</div>
 						</div>
-						<div class="form-group">
+						<div class="form-group menu_icon">
 							<label class="col-md-3 control-label">图标</label>
 							<div class="col-md-9" style="padding-top: 9px;">
 								<input type="text" name="icon" class="form-control input-inline input-medium" placeholder="eg: icon-home" style="display: none;">
 								<a data-toggle="modal" href="#fullicon" class="btn btn-xs btn-success">选择图标</a>
-								<span style="margin-left: 10px;position: relative;top: 2px;" aria-hidden="true" id="menu_icon_choose" class=""></span>
+								<i style="margin-left: 10px;position: relative;top: 2px;" aria-hidden="true" class=""></i>
 								<br/>
 								<span class="help-inline">窄屏时只展示图标 可选图标</span>
 							</div>
@@ -283,6 +222,171 @@
 									<label class="radio-inline">
 									<div class=""><span class=""><input type="radio" name="status" value="2"></span></div> 隐藏 </label>
 								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn default" data-dismiss="modal">放弃</button>
+					<button type="button" class="btn blue save">保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 为一级目录添加子目录 -->
+	<a style="display: none;" data-toggle="modal" href="#addsecondmenu" id="addsecondmenubutton">添加子目录</a>
+	<div class="modal fade" id="addsecondmenu" tabindex="-1" role="basic" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+					<h4 class="modal-title"></h4>
+				</div>
+				<div class="alert alert-warning" style="padding: 14px;">
+					添加子目录后，该目录将作为分类目录使用
+				</div>
+				<div class="errormsg">
+				</div>
+				<div class="modal-body form-horizontal">
+					<input type="" name="id" style="display: none;">
+					<div class="form-body">
+						<div class="form-group">
+							<label class="col-md-3 control-label">目录名</label>
+							<div class="col-md-9">
+								<input type="text" name="mname" class="form-control input-inline input-medium" placeholder="目录展示名 必填">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">访问地址</label>
+							<div class="col-md-9">
+								<input type="text" name="url" class="form-control input-inline input-medium" placeholder="格式 class/function">
+								<span class="help-inline">必须填写</span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">权限别名</label>
+							<div class="col-md-9">
+								<input type="text" name="action" class="form-control input-inline input-medium" placeholder="不建议填写">
+								<span class="help-inline">不建议填写，默认与访问地址相同</span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">图标</label>
+							<div class="col-md-9" style="padding-top: 9px;">
+								<input type="text" name="icon" class="form-control input-inline input-medium" placeholder="eg: icon-home" style="display: none;">
+								<a data-toggle="modal" href="#fullicon" class="btn btn-xs btn-success">选择图标</a>
+								<span style="margin-left: 10px;position: relative;top: 2px;" aria-hidden="true" id="edit_icon_choose" class=""></span>
+								<br/>
+								<span class="help-inline">窄屏时只展示图标 可选图标</span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">是否显示</label>
+							<div class="col-md-9">
+								<div class="radio-list">
+									<label class="radio-inline">
+									<div class=""><span class="checked"><input type="radio" name="status" value="1" checked ></span></div> 显示 </label>
+									<label class="radio-inline">
+									<div class=""><span class=""><input type="radio" name="status" value="2"></span></div> 隐藏 </label>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn default" data-dismiss="modal">放弃</button>
+					<button type="button" class="btn blue save">保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 修改二级目录 -->
+	<a style="display: none;" data-toggle="modal" href="#editsecondmenu" id="editsecondmenubutton">修改目录</a>
+	<div class="modal fade" id="editsecondmenu" tabindex="-1" role="basic" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+					<h4 class="modal-title"></h4>
+				</div>
+				<div id="editfirstmenuerrormsg">
+				</div>
+				<div class="modal-body form-horizontal">
+					<input type="" name="id" style="display: none;">
+					<div class="form-body">
+						<div class="form-group">
+							<label class="col-md-3 control-label">目录名</label>
+							<div class="col-md-9">
+								<input type="text" name="mname" class="form-control input-inline input-medium" placeholder="目录展示名 必填">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">访问地址</label>
+							<div class="col-md-9">
+								<input type="text" name="url" class="form-control input-inline input-medium" placeholder="格式 class/function">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">权限别名</label>
+							<div class="col-md-9">
+								<input type="text" name="action" class="form-control input-inline input-medium" placeholder="不建议填写">
+								<span class="help-inline">不建议填写，默认与访问地址相同</span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">图标</label>
+							<div class="col-md-9" style="padding-top: 9px;">
+								<input type="text" name="icon" class="form-control input-inline input-medium" placeholder="eg: icon-home" style="display: none;">
+								<a data-toggle="modal" href="#fullicon" class="btn btn-xs btn-success">选择图标</a>
+								<span style="margin-left: 10px;position: relative;top: 2px;" aria-hidden="true" id="edit_second_icon_choose" class=""></span>
+								<br/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">是否显示</label>
+							<div class="col-md-9">
+								<div class="radio-list">
+									<label class="radio-inline">
+									<div class=""><span class="checked"><input type="radio" name="status" value="1" checked ></span></div> 显示 </label>
+									<label class="radio-inline">
+									<div class=""><span class=""><input type="radio" name="status" value="2"></span></div> 隐藏 </label>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn default" data-dismiss="modal">放弃</button>
+					<button type="button" class="btn blue save">保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 为目录添加权限 -->
+	<a style="display: none;" data-toggle="modal" href="#addactionmenu" id="addactionmenubutton">添加权限</a>
+	<div class="modal fade" id="addactionmenu" tabindex="-1" role="basic" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+					<h4 class="modal-title"></h4>
+				</div>
+				<div class="errormsg">
+				</div>
+				<div class="modal-body form-horizontal">
+					<input type="" name="id" style="display: none;">
+					<div class="form-body">
+						<div class="form-group">
+							<label class="col-md-3 control-label">权限名</label>
+							<div class="col-md-9">
+								<input type="text" name="mname" class="form-control input-inline input-medium" placeholder="权限描述，选填">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">权限别名</label>
+							<div class="col-md-9">
+								<input type="text" name="action" class="form-control input-inline input-medium" placeholder="必须填写">
+								<span class="help-inline">必须填写且唯一</span>
 							</div>
 						</div>
 					</div>
@@ -1142,4 +1246,5 @@
 			</div>
 		</div>
 	</div>
+
 </div>
