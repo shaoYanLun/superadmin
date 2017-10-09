@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Log extends CI_Controller
+class User extends CI_Controller
 {
 
     function __construct()
@@ -108,5 +108,22 @@ class Log extends CI_Controller
             ajax(- 3, null, "修改密码失败");
         }
         ajax(1, null, "更新成功");
+    }
+
+    // 管理员修改用户权限后，用户刷新自己的权限
+    function refreshRight()
+    {
+        $user = checkLogin();
+        if (! $user) {
+            ajax(- 1, null, "请先登录");
+        }
+        $uname = $user['username'];
+        
+        $user = $this->model->getUserByName($uname);
+        if (! $user) {
+            ajax(- 2, null, "获取当前用户失败");
+        }
+        $this->model->wsession($user);
+        ajax(1, null, "OK");
     }
 }
