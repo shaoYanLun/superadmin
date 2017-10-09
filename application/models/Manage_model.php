@@ -83,17 +83,46 @@ class Manage_model extends CI_Model
         return $this->_db->get($this->_strPlatMenu)->result_array();
     }
 
-    // 插入目录权限
-    function insertMenu($arrInsert)
-    {
-        $arrInsert['ctime'] = date("Y-m-d H:i:s", time());
-        $arrInsert['mtime'] = date("Y-m-d H:i:s", time());
-        return $this->_db->insert($this->_strPlatMenu, $arrInsert);
-    }
-
-    // 删除目录
-    function deleteMenuByWhere($arr)
-    {
-        return $this->_db->delete($this->_strPlatMenu, $arr);
-    }
+	//获取目录
+	function getMenu($arrWhere = array())
+	{
+		$this->_db->order_by('sort' , 'desc');
+		$arrWhere = $arrWhere;
+		$arrWhere['type'] = 1;
+		$arrWhere['status'] = 1;
+		$this->_db->where($arrWhere);
+		return $this->_db->get($this->_strPlatMenu)->result_array();
+	}
+	//获取目录
+	function getMenuByWhere($arrWhere)
+	{
+		return $this->_db->get_where($this->_strPlatMenu ,$arrWhere )->result_array();
+	}
+	//获取权限
+	function getAction()
+	{
+		$this->_db->order_by('sort' , 'desc');
+		$this->_db->where('type',2);
+		$this->_db->where('status',1);
+		return $this->_db->get($this->_strPlatMenu)->result_array();
+	}
+	//插入目录权限
+	function insertMenu($arrInsert)
+	{
+		$arrInsert['ctime'] = date("Y-m-d H:i:s" ,time());
+		$arrInsert['mtime'] = date("Y-m-d H:i:s" ,time());
+		$this->_db->insert($this->_strPlatMenu , $arrInsert);
+		return $this->_db->insert_id();
+	}
+	//修改目录
+	function EditMenu($arrEdit , $arrWhere)
+	{
+		$arrEdit['mtime'] = date("Y-m-d H:i:s");
+		return $this->_db->update($this->_strPlatMenu , $arrEdit , $arrWhere);
+	}
+	//删除目录
+	function deleteMenuByWhere($arr)
+	{
+		return $this->_db->delete($this->_strPlatMenu ,$arr);
+	}
 }
