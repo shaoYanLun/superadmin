@@ -21,3 +21,4 @@ function alertError(errormsg)
 	$("body").append(html);
 	$("#errorbutton").click();
 }
+var baseurl = "/m/"

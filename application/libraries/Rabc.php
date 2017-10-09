@@ -52,7 +52,8 @@ class Rabc
             'parent' => ''
         );
         
-        $atfunc = $CI->router->fetch_class() . "/" . $CI->router->fetch_method();
+        $atfunc =  empty($CI->router->fetch_directory() )?"/":"/".$CI->router->fetch_directory();
+        $atfunc .= $CI->router->fetch_class()."/".$CI->router->fetch_method();
         
         if (! empty($arrMenuList)) {
             $arrLinkMenu = array();

@@ -120,7 +120,7 @@
                 
 echo $active;
                 ?>">
-					<a href="/<?php
+					<a href="<?php
                 
 echo $menu['url'];
                 ?>">
@@ -146,7 +146,7 @@ echo $menu['mname'];
 echo $start == 0 ? "start" : "";
                 ?> <?php
                 
-echo $active;
+echo empty($active)?"":$active;
                 ?>">
 					<a href="javascript:;">
 					<i class="<?php
@@ -168,7 +168,7 @@ echo $menu['mname'];
                     
 echo $active;
                     ?>">
-							<a href="/<?php
+							<a href="<?php
                     
 echo $v['url'];
                     ?>">

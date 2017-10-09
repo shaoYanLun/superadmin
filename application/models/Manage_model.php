@@ -83,29 +83,6 @@ class Manage_model extends CI_Model
         return $this->_db->get($this->_strPlatMenu)->result_array();
     }
 
-	//获取目录
-	function getMenu($arrWhere = array())
-	{
-		$this->_db->order_by('sort' , 'desc');
-		$arrWhere = $arrWhere;
-		$arrWhere['type'] = 1;
-		$arrWhere['status'] = 1;
-		$this->_db->where($arrWhere);
-		return $this->_db->get($this->_strPlatMenu)->result_array();
-	}
-	//获取目录
-	function getMenuByWhere($arrWhere)
-	{
-		return $this->_db->get_where($this->_strPlatMenu ,$arrWhere )->result_array();
-	}
-	//获取权限
-	function getAction()
-	{
-		$this->_db->order_by('sort' , 'desc');
-		$this->_db->where('type',2);
-		$this->_db->where('status',1);
-		return $this->_db->get($this->_strPlatMenu)->result_array();
-	}
 	//插入目录权限
 	function insertMenu($arrInsert)
 	{
