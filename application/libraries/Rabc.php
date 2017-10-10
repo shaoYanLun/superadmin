@@ -12,10 +12,15 @@ class Rabc
         if ($level == 8) {
             return true;
         }
+        // 只有超级管理员才有权限
         if ($level != 8 && $a == "superadmin") {
             return false;
         }
         if ($level == 4) {
+            return true;
+        }
+        // 普通管理员有权限访问
+        if ($level > 1 && $a == "normaladmin") {
             return true;
         }
         
