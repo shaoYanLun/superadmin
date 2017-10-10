@@ -6,9 +6,12 @@ class Manage extends MY_Controller {
 	function __construct()
 	{
 		parent::__construct();
+		/*
+			只有超级管理员 和管理员 有访问此目录权限
+		*/
+		checkRightPage();
 
 		$class= $this->router->fetch_class();
-
 		$this->load->model("{$class}_model" , "model" , true);
 	}
 	/*
@@ -20,10 +23,8 @@ class Manage extends MY_Controller {
 		$this->load->library('page');
 
 		$page = new Page;
-		$page->num = 50;
-
+		$page->num = 5;
 		$arrLimit = $page->getlimit();
-
 		$arrWhere['ls'] = $arrLimit['ls'];
 		$arrWhere['le'] = $arrLimit['le'];
 
