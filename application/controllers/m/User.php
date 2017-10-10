@@ -17,14 +17,16 @@ class User extends CI_Controller
         $this->load->library('page');
         
         $page = new Page();
-        $page->num = 50;
+        $page->num = 5;
         
         $arrLimit = $page->getlimit();
         
         $arrWhere['ls'] = $arrLimit['ls'];
         $arrWhere['le'] = $arrLimit['le'];
         
-        $arrRes = $this->model->getManageUserByWhere($arrWhere);
+        $userinfo = checkLogin();
+        $level = $userinfo['level'];
+        $arrRes = $this->model->getManageUserByWhere($arrWhere , $level);
         
         $all = $arrRes['num'];
         
@@ -32,9 +34,6 @@ class User extends CI_Controller
         $data['page_view'] = $page->view(array(
             'all' => $all
         ));
-        
-        $right = $this->model->getMenuKv();
-        $data['right'] = $right;
         
         $this->load->myview('manage/user', $data);
     }

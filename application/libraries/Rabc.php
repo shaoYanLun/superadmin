@@ -7,8 +7,10 @@ class Rabc
     {
         $ci = & get_instance();
         $ci->load->library('session');
-        $level = $ci->session->userdata('level');
-        $right = $ci->session->userdata('right');
+        $userinfo = $ci->session->userdata("user_info");
+        $level = $userinfo['level'];
+        $right = $userinfo['right'];
+
         if ($level == 8) {
             return true;
         }

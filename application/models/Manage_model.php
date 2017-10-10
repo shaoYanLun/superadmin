@@ -18,29 +18,29 @@ class Manage_model extends CI_Model
     }
 
     // 用户查询
-    function getManageUserByWhere($arr = array())
-    {
-        $p = "id,username,nick_name,gcode,user_group,user_level,user_right,status,salt,ctime,mtime";
-        $sql = " select {$p} from {$this->_strUser} where 1=1 ";
-        $sqlNum = " select count(*) as num from {$this->_strUser} where 1=1 ";
+    // function getManageUserByWhere($arr = array())
+    // {
+    //     $p = "id,username,nick_name,gcode,user_group,user_level,user_right,status,salt,ctime,mtime";
+    //     $sql = " select {$p} from {$this->_strUser} where 1=1 ";
+    //     $sqlNum = " select count(*) as num from {$this->_strUser} where 1=1 ";
         
-        $arrWhere = array();
-        $arrWhereNum = array();
+    //     $arrWhere = array();
+    //     $arrWhereNum = array();
         
-        if (isset($arr['ls'])) {
-            $sql .= " limit ? , ?";
-            $arrWhere[] = $arr['ls'];
-            $arrWhere[] = $arr['le'];
-        }
+    //     if (isset($arr['ls'])) {
+    //         $sql .= " limit ? , ?";
+    //         $arrWhere[] = $arr['ls'];
+    //         $arrWhere[] = $arr['le'];
+    //     }
         
-        $list = $this->_db->query($sql, $arrWhere)->result_array();
-        $arrCount = $this->_db->query($sqlNum, $arrWhereNum)->row_array();
+    //     $list = $this->_db->query($sql, $arrWhere)->result_array();
+    //     $arrCount = $this->_db->query($sqlNum, $arrWhereNum)->row_array();
         
-        return array(
-            'list' => $list,
-            'num' => $arrCount['num']
-        );
-    }
+    //     return array(
+    //         'list' => $list,
+    //         'num' => $arrCount['num']
+    //     );
+    // }
 
     function getMenuKv()
     {
