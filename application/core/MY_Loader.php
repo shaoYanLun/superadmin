@@ -12,17 +12,17 @@ class MY_Loader extends CI_Loader {
         
     	$arrMenu = $CI->rabc->getMenu();
         $menulist = $arrMenu['arrmenu'];
-        $current = $arrMenu['current'];
+        $current = empty($data['_current'])?$arrMenu['current']:$data['_current'];
 
         empty($arrLayout)?$arrLayout=array(
             'header'=>'base_header',
             'footer'=>'base_footer',
         ):"";
-        $atfunc =  empty($CI->router->fetch_directory() )?"/":"/".$CI->router->fetch_directory();
-        $atfunc .= $CI->router->fetch_class()."/".$CI->router->fetch_method();
+        // $atfunc =  empty($CI->router->fetch_directory() )?"/":"/".$CI->router->fetch_directory();
+        // $atfunc .= $CI->router->fetch_class()."/".$CI->router->fetch_method();
         $arrHeaderData = array(
             '_menulist'=>$menulist,
-            '_atfunc'=>$atfunc,
+            // '_atfunc'=>$atfunc,
             '_current'=>$current
         );
 

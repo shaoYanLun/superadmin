@@ -88,3 +88,11 @@ function gconfig($ckey)
     }
     return $config[$ckey];
 }
+/*
+    错误提示页
+*/
+function errorpage($msg = "")
+{
+    echo $msg;
+    exit;
+}

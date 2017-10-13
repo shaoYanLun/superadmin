@@ -9,6 +9,8 @@ class User_model extends CI_Model
 
     private $_strUserGroupRight = 'user_group_right';
 
+    private $_strUserGroup = 'user_group';
+
     private $_strPlatMenu = 'plat_menu';
 
     private $_db = "";
@@ -60,6 +62,7 @@ class User_model extends CI_Model
         
         $sess['level'] = $level;
         $sess['right'] = $jsonRight;
+        $sess['group'] = $group;
         $sess['username'] = $user['username'];
         
         $ci = &get_instance();
@@ -79,10 +82,8 @@ class User_model extends CI_Model
         if ($baseRight != "") {
             $right = explode(",", $right);
         }
-        $sql = "select pm.action from {$this->_strUserGroupRight} ugr left join {$this->_strPlatMenu} pm on ugr.pmid=pm.id where ugr.ugid=?";
-        $action = $this->_db->query($sql, array(
-            $group
-        ))->result_array();
+        $sql = "select pm.action from {$this->_strUserGroupRight} ugr left join {$this->_strPlatMenu} pm on ugr.pmid=pm.id where ugr.ugid in ({$group})";
+        $action = $this->_db->query($sql , array())->result_array();
         if ($action) {
             foreach ($action as $value) {
                 $right[] = $value['action'];
@@ -96,6 +97,14 @@ class User_model extends CI_Model
     {
         $user = $this->_db->get_where($this->_strUser, array(
             "username" => $name
+        ))->row_array();
+        return $user;
+    }
+
+    function getUserByUid($id)
+    {
+        $user = $this->_db->get_where($this->_strUser, array(
+            "id" => $id
         ))->row_array();
         return $user;
     }
@@ -141,5 +150,17 @@ class User_model extends CI_Model
             'list' => $list,
             'num' => $arrCount['num']
         );
+    }
+    /*
+        获取用户可分配权限组
+    */
+    function getUserGroup($strGroup = "")
+    {
+        $sql = "select id,gname from {$this->_strUserGroup} where 1 = 1 ";
+        if(!empty($strGroup))
+        {
+            $sql .=" and id in ({$strGroup}) ";
+        }
+        return $this->_db->query($sql)->result_array();
     }
 }

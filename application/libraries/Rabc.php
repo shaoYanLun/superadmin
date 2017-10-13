@@ -31,7 +31,7 @@ class Rabc
         }
         
         $arrRight = json_decode($right, true);
-        if (! in_array($a, $arrRight)) {
+        if (empty($arrRight) || ! in_array($a, $arrRight)) {
             return false;
         }
         return true;

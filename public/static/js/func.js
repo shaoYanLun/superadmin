@@ -17,8 +17,33 @@ function alertError(errormsg)
 		errormsg = '发生错误';
 	}
 	errormsg = '<span style="color:#d64635;font-weight: 900;">'+errormsg+'</span>';
-	var html = '<a style="display: none;" data-toggle="modal" href="#error" id="errorbutton">删除目录</a><div class="modal fade" id="error" tabindex="-1" role="basic" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button><h4 class="modal-title">'+errormsg+'</h4></div><div class="modal-footer"><button type="button" class="btn btn-danger" data-dismiss="modal">关闭</button></div></div></div></div>';
+	var html = '<div class="modal fade" id="error" tabindex="-1" role="basic" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button><h4 class="modal-title">'+errormsg+'</h4></div><div class="modal-footer"><button type="button" class="btn btn-danger" data-dismiss="modal">关闭</button></div></div></div></div>';
 	$("body").append(html);
-	$("#errorbutton").click();
+	$("#error").modal("show");
+}
+//弹出提示框
+function alertSuccess(errormsg)
+{
+	if(!errormsg)
+	{
+		errormsg = '操作成功';
+	}
+	errormsg = '<span>'+errormsg+'</span>';
+	var html = '<div class="modal fade" id="error" tabindex="-1" role="basic" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button><h4 class="modal-title">'+errormsg+'</h4></div><div class="modal-footer"><button type="button" class="btn btn btn-primary" data-dismiss="modal">确定</button></div></div></div></div>';
+	$("body").append(html);
+	$("#error").modal("show");
 }
 var baseurl = "/m/"
+$.extend({
+	loadajax:function(obj)
+	{
+        Metronic.blockUI({
+            boxed: true
+        });
+        obj.complete = function()
+        {
+        	Metronic.unblockUI();
+        }
+		$.ajax(obj);
+	}
+})

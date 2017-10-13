@@ -11,7 +11,7 @@ var Metronic = function() {
 
     var resizeHandlers = [];
 
-    var assetsPath = '../../assets/';
+    var assetsPath = '/static/';
 
     var globalImgPath = 'global/img/';
 
@@ -197,6 +197,7 @@ var Metronic = function() {
 
     // Handles custom checkboxes & radios using jQuery Uniform plugin
     var handleUniform = function() {
+
         if (!$().uniform) {
             return;
         }

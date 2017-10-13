@@ -19,6 +19,7 @@
 <link href="<?=static_url('global/plugins/bootstrap/css/bootstrap.min.css');?>" rel="stylesheet" type="text/css"/>
 <link href="<?=static_url('global/css/components.min.css')?>" id="style_components" rel="stylesheet" type="text/css"/>
 <link href="<?=static_url('pages/css/layout.css')?>" rel="stylesheet" type="text/css"/>
+<link href="<?=static_url('global/plugins/uniform/css/uniform.default.css')?>" rel="stylesheet" type="text/css"/>
 <script src="<?=static_url('global/plugins/jquery.min.js')?>" type="text/javascript"></script>
 <link id="style_color" href="<?=static_url('pages/css/themes/default.css')?>" rel="stylesheet" type="text/css"/>
 <!-- END THEME STYLES -->
@@ -113,8 +114,9 @@
         $start = 0;
         
         foreach ($_menulist as $menu) {
+        	$active = "";
             if (empty($menu['_list'])) {
-                $active = $menu['url'] == $_atfunc ? "active" : "";
+                $active = $menu['url'] == $_current['url'] ? "active" : "";
                 ?>
 				<li class="<?php
                 
@@ -137,8 +139,9 @@ echo $menu['mname'];
 				</li>
 				<?php
             } else {
+
                 foreach ($menu['_list'] as $v) {
-                    $v['url'] == $_atfunc && empty($active) ? $active = " active open " : "";
+                    $v['url'] == $_current['url'] && empty($active) ? $active = " active open " : "";
                 }
                 ?>
 				<li class="<?php
@@ -162,7 +165,7 @@ echo $menu['mname'];
 					<ul class="sub-menu">
 						<?php
                 foreach ($menu['_list'] as $v) {
-                    $active = $v['url'] == $_atfunc ? "active" : "";
+                    $active = $v['url'] == $_current['url'] ? "active" : "";
                     ?>
 						<li class="<?php
                     

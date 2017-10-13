@@ -18,25 +18,25 @@ class Manage extends MY_Controller {
 		用户管理相关
 		用户列表
 	*/
-	function user()
-	{
-		$this->load->library('page');
+	// function user()
+	// {
+	// 	$this->load->library('page');
 
-		$page = new Page;
-		$page->num = 5;
-		$arrLimit = $page->getlimit();
-		$arrWhere['ls'] = $arrLimit['ls'];
-		$arrWhere['le'] = $arrLimit['le'];
+	// 	$page = new Page;
+	// 	$page->num = 5;
+	// 	$arrLimit = $page->getlimit();
+	// 	$arrWhere['ls'] = $arrLimit['ls'];
+	// 	$arrWhere['le'] = $arrLimit['le'];
 
-		$arrRes = $this->model->getManageUserByWhere($arrWhere);
+	// 	$arrRes = $this->model->getManageUserByWhere($arrWhere);
 
-		$all = $arrRes['num'];
+	// 	$all = $arrRes['num'];
 
-		$data['list'] = $arrRes['list'];
-		$data['page_view'] = $page->view(array('all'=>$all));
+	// 	$data['list'] = $arrRes['list'];
+	// 	$data['page_view'] = $page->view(array('all'=>$all));
 
-		$this->load->myview('manage/user' , $data);
-	}
+	// 	$this->load->myview('manage/user' , $data);
+	// }
 
 
 	/*
