@@ -163,4 +163,8 @@ class User_model extends CI_Model
         }
         return $this->_db->query($sql)->result_array();
     }
+
+    function deleteUserById($id){
+        return $this->_db->delete($this->_strUser , array('id'=>$id));
+    }
 }

@@ -26,7 +26,7 @@ echo $_current['mname'];
 </div>
 <div class="row">
     <div class="col-md-12">
-        <div class="portlet box grey-cascade">
+        <div class="portlet box blue-hoki">
             <div class="portlet-title">
                 <div class="caption">
                     登录用户列表
@@ -76,7 +76,7 @@ echo $_current['mname'];
                             <?php
                             if (!empty($value['gcode'])) {
                             ?>
-                            <a class="btn btn-default" href="#erwm<?=$value['id']?>" data-toggle="modal"><?=$value['gcode']?></a>
+                            <a class="btn btn-default btn-xs" href="#erwm<?=$value['id']?>" data-toggle="modal"><?=$value['gcode']?></a>
                              <script type="text/javascript">
                                    $(function(){
                                       var jj = "<?=$value['id']?>";
@@ -107,18 +107,24 @@ echo $_current['mname'];
                             if($value['user_level'] != 4)
                             {
                             ?>
-                            查看/<a href="/m/user/editright?id=<?php echo $value['id'];?>">编辑</a>
+                            <a class="btn blue-madison btn-xs" href="/m/user/editright?id=<?php echo $value['id'];?>">
+                            <i class="fa fa-edit"></i>
+                            查看编辑</a>
                             <?php
                             }
                             ?>
                         </td>
-                        <td>删除</td>
+                        <td>
+                            <button aid="<?php echo $value['id'];?>" class="btn btn-danger delete btn-xs">
+                            <i class="fa fa-trash-o"></i>
+                            删除
+                            </button>
+                        </td>
                     </tr>
                     <?php
                         }
                     }
                     ?>
-                    
                     </tbody>
                     </table>
                 </div>
@@ -150,31 +156,25 @@ echo $_current['mname'];
             </div>
             <div class="modal-body form-horizontal">
                 <div class="form-body">
-<!--                     <div class="form-group">
-                        <label class="col-md-3 control-label">目录名</label>
-                        <div class="col-md-9">
-                            <input type="text" name="mname" class="form-control input-inline input-medium" placeholder="目录展示名 必填">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-3 control-label">访问地址</label>
-                        <div class="col-md-9">
-                            <input type="text" name="url" class="form-control input-inline input-medium" placeholder="格式 class/function">
-                            <span class="help-inline">拥有子目录的分类目录不填写</span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-3 control-label">权限别名</label>
-                        <div class="col-md-9">
-                            <input type="text" name="action" class="form-control input-inline input-medium" placeholder="不建议填写">
-                            <span class="help-inline">不建议填写，默认与访问地址相同</span>
-                        </div>
-                    </div> -->
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn default" data-dismiss="modal">放弃</button>
                 <button type="button" class="btn blue save">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="delete" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">确认删除</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn default" data-dismiss="modal">放弃</button>
+                <button type="button" class="btn btn-danger sure">删除</button>
             </div>
         </div>
     </div>

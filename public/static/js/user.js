@@ -65,7 +65,7 @@ window.onload=function(){
                         return false;
                     }
                     $e.find(".close").click();
-                    location.onload();
+                    location.reload();
                 },
                 error:function()
                 {
@@ -73,5 +73,30 @@ window.onload=function(){
                 }
             })
         }
+    })
+    $(".delete").one("click",function(){
+        var obj = this;
+        $("#delete").modal("show");
+        var id = $(this).attr("aid");
+        $("#delete .sure").one("click",function(){
+
+            $("#delete").modal("hide");
+            $.loadajax({
+                url:baseurl+"User/deleteUser?id="+id,
+                success:function(res)
+                {
+                    if(res.code == 1)
+                    {
+                        $(obj).parent().parent().remove();
+                    }else{
+                        alertError(res.msg);
+                    }
+                },
+                error:function()
+                {
+                    alertError("请稍后重试");
+                }
+            })
+        })
     })
 }

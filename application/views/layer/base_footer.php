@@ -21,7 +21,7 @@
 <script src="<?=static_url('global/plugins/bootstrap/js/bootstrap.min.js')?>" type="text/javascript"></script>
 <script src="<?=static_url('global/plugins/jquery-slimscroll/jquery.slimscroll.min.js')?>" type="text/javascript"></script>
 <script src="<?=static_url('global/plugins/jquery.blockui.min.js')?>" type="text/javascript"></script>
-<script src="<?=static_url('global/plugins/uniform/jquery.uniform.min.js')?>" type="text/javascript"></script>
+<!-- <script src="<?=static_url('global/plugins/uniform/jquery.uniform.min.js')?>" type="text/javascript"></script> -->
 <!-- END CORE PLUGINS -->
 <script src="<?=static_url('global/js/metronic.js')?>" type="text/javascript"></script>
 <script src="<?=static_url('pages/js/quick-sidebar.js')?>" type="text/javascript"></script>

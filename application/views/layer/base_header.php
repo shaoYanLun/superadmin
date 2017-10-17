@@ -23,7 +23,7 @@
 <script src="<?=static_url('global/plugins/jquery.min.js')?>" type="text/javascript"></script>
 <link id="style_color" href="<?=static_url('pages/css/themes/default.css')?>" rel="stylesheet" type="text/css"/>
 <!-- END THEME STYLES -->
-<link rel="shortcut icon" href="favicon.ico"/>
+<!-- <link rel="shortcut icon" href="favicon.ico"/> -->
 </head>
 <body class="page-header-fixed page-quick-sidebar-over-content ">
 <!-- BEGIN HEADER -->

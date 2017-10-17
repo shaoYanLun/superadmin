@@ -113,7 +113,9 @@
 							<td><?php echo $action['mname'];?></td>
 							<td><?php echo $action['action'];?></td>
 							<td aid="<?php echo $action['id'];?>"  aname="<?php echo $action['mname'];?>">
-								<button class="btn btn-xs btn-danger delete_first_menu">删除</button>
+								<button class="btn btn-xs btn-danger delete_first_menu">
+								<i class="fa fa-trash-o"></i>
+								删除</button>
 							</td>
 						</tr>
 						<?php
