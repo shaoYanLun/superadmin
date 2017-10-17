@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
+<<<<<<< HEAD
 class User extends MY_Controller {
 
 	function __construct() {
@@ -380,4 +381,124 @@ class User extends MY_Controller {
 		ajax(1 , array() , 'success');
 
 	}
+=======
+class User extends MY_Controller
+{
+
+    function __construct()
+    {
+        parent::__construct();
+        $class = $this->router->fetch_class();
+        
+        $this->load->model("{$class}_model", "model", true);
+    }
+
+    function index()
+    {
+        $this->load->library('page');
+        
+        $page = new Page();
+        $page->num = 5;
+        
+        $arrLimit = $page->getlimit();
+        
+        $arrWhere['ls'] = $arrLimit['ls'];
+        $arrWhere['le'] = $arrLimit['le'];
+        
+        $userinfo = $this->GUSER;
+        $level = $userinfo['level'];
+        $arrRes = $this->model->getManageUserByWhere($arrWhere, $level);
+        
+        $all = $arrRes['num'];
+        
+        $data['list'] = $arrRes['list'];
+        $data['page_view'] = $page->view(array(
+            'all' => $all
+        ));
+        
+        $this->load->myview('manage/user', $data);
+    }
+
+    // 添加用户
+    function ajaxAddUser()
+    {
+        checkRightPage();
+        $uname = $this->input->post("uname", true);
+        $pwd = $this->input->post("pwd", true);
+        $nick_name = $this->input->post("nick_name", true);
+        if ($uname == "" || $pwd == "" || $nick_name) {
+            ajax(- 1, null, "用户名或者密码或者昵称不能为空");
+        }
+        $arr['uname'] = $uname;
+        $arr['pwd'] = $pwd;
+        $arr['nick_name'] = $nick_name;
+        
+        $user = $this->model->addUser($arr);
+        $data['uname'] = $uname;
+        ajax($user['code'], $data, $user['msg']);
+    }
+
+    // 管理员修改密码
+    function ajaxAdminCPwd()
+    {
+        checkRightPage();
+        $uname = $this->input->post("uname", true);
+        $pwd = $this->input->post("pwd", true);
+        if ($uname == "" || $pwd == "") {
+            ajax(- 1, null, "参数错误");
+        }
+        $user = $this->model->getUserByName($uname);
+        if (! $user) {
+            ajax(- 2, null, "获取当前用户失败");
+        }
+        $data['password'] = password($pwd, $salt);
+        $where['username'] = $uname;
+        $isS = $this->model->updateUser($data, $where);
+        if (! $isS) {
+            ajax(- 3, null, "修改密码失败");
+        }
+        ajax(1, null, "更新成功");
+    }
+
+    // 用户自己修改密码
+    function ajaxChangePwd()
+    {
+        $user = $this->GUSER;
+        $uname = $user['username'];
+        $opwd = $this->input->post("opwd", true);
+        $npwd = $this->input->post("npwd", true);
+        if ($opwd == "" || $npwd == "") {
+            ajax(- 1, null, "新密码或者老密码不能为空");
+        }
+        $user = $this->model->getUserByName($uname);
+        if (! $user) {
+            ajax(- 2, null, "获取当前用户失败");
+        }
+        $salt = $user['salt'];
+        if ($user['password'] != password($opwd, $salt)) {
+            ajax(- 3, null, "老密码不正确");
+        }
+        $data['password'] = password($npwd, $salt);
+        $where['username'] = $uname;
+        $isS = $this->model->updateUser($data, $where);
+        if (! $isS) {
+            ajax(- 3, null, "修改密码失败");
+        }
+        ajax(1, null, "更新成功");
+    }
+
+    // 管理员修改用户权限后，用户刷新自己的权限
+    function refreshRight()
+    {
+        $user = $this->GUSER;
+        $uname = $user['username'];
+        
+        $user = $this->model->getUserByName($uname);
+        if (! $user) {
+            ajax(- 2, null, "获取当前用户失败");
+        }
+        $this->model->wsession($user);
+        ajax(1, null, "OK");
+    }
+>>>>>>> ssss
 }

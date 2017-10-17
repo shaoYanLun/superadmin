@@ -22,6 +22,10 @@ class Welcome extends MY_Controller
      */
     public function index()
     {
+<<<<<<< HEAD
         redirect('/m/user/index');
+=======
+        redirect("/m/user/index");
+>>>>>>> ssss
     }
 }
