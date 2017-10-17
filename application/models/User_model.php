@@ -64,6 +64,7 @@ class User_model extends CI_Model
         $sess['right'] = $jsonRight;
         $sess['group'] = $group;
         $sess['username'] = $user['username'];
+        $sess['nick_name'] = $user['nick_name'];
         
         $ci = &get_instance();
         $ci->load->library('session');
