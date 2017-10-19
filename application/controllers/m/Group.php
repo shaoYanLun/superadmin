@@ -1,7 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-<<<<<<< HEAD
 class Group extends MY_Controller {
 
 	function __construct() {
@@ -103,21 +102,6 @@ class Group extends MY_Controller {
         $data['actionAllList'] = $actionAllList;
         $data['arrAllMenuKv'] = $arrAllMenuKv;
         $this->load->myview("manage/groupright", $data);
-=======
-class Group extends CI_Controller
-{
-
-    function __construct()
-    {
-        parent::__construct();
-        /*
-         * 只有超级管理员 和管理员 有访问此目录权限
-         */
-        checkRightPage();
-        $class = $this->router->fetch_class();
-        
-        $this->load->model("{$class}_model", "model", true);
->>>>>>> ssss
     }
 
 

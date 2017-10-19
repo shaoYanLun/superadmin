@@ -136,9 +136,9 @@
 								</label>
 							</li>
 								<?php
-								if(!empty($actionAllList[$v['id']]))
+								if(!empty($actionAllList[$value['id']]))
 								{
-									foreach ($actionAllList[$v['id']] as $ak => $av) {
+									foreach ($actionAllList[$value['id']] as $ak => $av) {
 
 										if(!in_array($av['action'], $arrRight))
 										{

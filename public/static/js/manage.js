@@ -79,8 +79,11 @@ $(function(){
 				$e.find("input[name='icon']").parent().parent().removeClass('has-error');
 			}
 			var id = $e.find("input[name='id']").val();
-			var url = $e.find("input[name='url']").val();
+			// var url = $e.find("input[name='url']").val();
 			var action = $e.find("input[name='action']").val();
+			var dir = $e.find("input[name='dir']").val();
+			var classname = $e.find("input[name='classname']").val();
+			var func = $e.find("input[name='func']").val();
 			var radio = 1;
 			$e.find("input[name='status']").each(function(){
 				if ($(this).attr("checked") )
@@ -90,7 +93,9 @@ $(function(){
 			});
 			var param = {
 				mname:mname,
-				url:url,
+				dir:dir,
+				classname:classname,
+				func:func,
 				icon:icon,
 				action:action,
 				radio:radio,
@@ -408,4 +413,83 @@ $(function(){
 		}
 		$("#fullicon .close").click();
 	})
+	$(".sort_first_menu").click(function(){
+		var parent = $(this).parent().attr("aid");
+
+		if(!parent || parent == undefined || parent == "")
+		{
+			parent = 0;
+		}
+		$.loadajax({
+			url:baseurl+"Manage/getSortMeun?parent="+parent,
+			success:function(res){
+				if(res.code !=1)
+				{
+					alertError(res.msg);
+					return false;
+				}
+				var data = res.data;
+				var html = "";
+				if(data)
+				{
+					var arr = data['sortmenulist'];
+					sorthtml(arr);
+				}
+				$("#sort_menu").modal("show");
+				$("#sort_menu .save").one("click",function(){
+					var sortarr = []
+					var sortint = 1;
+					$("#sort_menu .sort .badge").each(function(){
+						var obj = {
+							id:$(this).attr("aid"),
+							sort:sortint,
+						}
+						sortarr.push(obj);
+						sortint++;
+					})
+					$("#sort_menu").modal("hide");
+
+					$.loadajax({
+						url:baseurl+"Manage/updateSortMeun",
+						data:{
+							'sortarr':sortarr
+						},
+						type:"post",
+						success:function(res){
+							if(res.code!=1)
+							{
+								alertError(res.msg);
+								return false;
+							}
+							location.reload();
+						},error:function(){
+							alertError(res.msg);
+						}
+					})
+				})
+			}
+		})
+	})
+
+
+	function sorthtml(arr)
+	{
+		var html = "";
+
+		for(var k in arr)
+		{
+			html+='<li class="list-group-item"><i class="'+arr[k]['icon']+'"></i>&nbsp;'+arr[k]['mname']+'<span aid="'+arr[k]['id']+'" class="badge badge-danger"><i class="fa fa-sort-asc"></i></span></li>';
+		}
+		$("#sort_menu .sort").html(html);
+		$("#sort_menu .sort .badge").click(function(){
+			var prev = $(this).parent().prev().clone(true);
+			if(!prev)
+			{
+				return false;
+			}
+			console.log(prev);
+			$(this).parent().prev().remove();
+			$(this).parent().after(prev);
+		})
+	}
 })

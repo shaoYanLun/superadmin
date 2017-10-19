@@ -26,6 +26,8 @@
 <script src="<?=static_url('global/js/metronic.js')?>" type="text/javascript"></script>
 <script src="<?=static_url('pages/js/quick-sidebar.js')?>" type="text/javascript"></script>
 <script src="<?=static_url('pages/js/layout.js')?>" type="text/javascript"></script>
+<script src="<?=static_url('global/js/md5.min.js')?>" type="text/javascript"></script>
+
 <script src="<?=static_url('js/func.js')?>" type="text/javascript"></script>
 <script src="<?=static_url('js/manage.js')?>" type="text/javascript"></script>
 <script>

@@ -79,7 +79,6 @@ window.onload=function(){
         $("#delete").modal("show");
         var id = $(this).attr("aid");
         $("#delete .sure").one("click",function(){
-
             $("#delete").modal("hide");
             $.loadajax({
                 url:baseurl+"User/deleteUser?id="+id,
@@ -98,5 +97,139 @@ window.onload=function(){
                 }
             })
         })
+    })
+    $(".changepwd").bind("click",function(){
+        var id = $(this).attr("aid");
+        $("#changepwdwindow").modal("show");
+        $("#changepwdwindow .save").one("click",function(){
+            var newpwd = $("#changepwdwindow input[name='newpwd']").val();
+            if(!newpwd)
+            {
+                $("#changepwdwindow input[name='newpwd']").parent().parent().addClass('has-error');
+                return false;
+            }else{
+                $("#changepwdwindow input[name='newpwd']").parent().parent().removeClass('has-error');
+            }
+            $("#changepwdwindow").modal("hide");
+            $("#changepwdwindow input[name='newpwd']").val("");
+            $.loadajax({
+                url:baseurl+"User/ajaxAdminCPwd",
+                type:"post",
+                data:{
+                    id:id,
+                    pwd:md5(newpwd)
+                },
+                success:function(res)
+                {
+                    if(res.code == 1)
+                    {
+                        alertSuccess("修改成功");
+                    }else{
+                        alertError(res.msg);
+                    }
+                },
+                error:function()
+                {
+                    alertError("请稍后重试");
+                }
+            })
+        })
+    })
+    $(".changeuserinfo").bind("click",function(){
+        var id = $(this).attr("aid");
+        var $cw = $("#changeuserinfowindow");
+        $.loadajax({
+            url:baseurl+"User/getUserinfo?id="+id,
+            success:function(res){
+                if(res.code!=1)
+                {
+                    alertError(res.msg);
+                    return false;
+                }
+                var data = res.data;
+                $cw.modal("show");
+                $cw.find("input[name='nick_name']").val(data['nick_name']);
+                $cw.find("input[name='status']").each(function(){
+                    $(this).val() == data['status']?$(this).attr('checked',true):$(this).attr('checked',false);
+                })
+                $cw.find(".save").one("click",savechange);
+            }
+        })
+        function savechange()
+        {
+            var nick_name = $cw.find("input[name='nick_name']").val();
+            if(!nick_name)
+            {
+                $cw.find("input[name='nick_name']").parent().parent().addClass('has-error');
+                return false;
+            }else{
+                $cw.find("input[name='nick_name']").parent().parent().removeClass('has-error');
+            }
+            var status = 2;
+            $cw.find("input[name='status']").each(function(){
+                if ($(this).attr("checked") )
+                {
+                    status = $(this).val();
+                }
+            });
+            var param = {
+                nick_name:nick_name,
+                status:status,
+                id:id
+            }
+            $cw.modal("hide");
+            $.loadajax({
+                url:baseurl+"User/updatUserinfo",
+                type:"post",
+                data:param,
+                success:function(res)
+                {
+                    if(res.code !=1)
+                    {
+                        alertError(res.msg);
+                        return false;
+                    }
+                    location.reload();
+                },
+                error:function(){
+                    alertError("修改失败");
+                }
+            })
+
+
+        }
+        // $("#changeuserinfowindow .save").one("click",function(){
+        //     var newpwd = $("#changeuserinfowindow input[name='newpwd']").val();
+        //     if(!newpwd)
+        //     {
+        //         $("#changeuserinfowindow input[name='newpwd']").parent().parent().addClass('has-error');
+        //         return false;
+        //     }else{
+        //         $("#changeuserinfowindow input[name='newpwd']").parent().parent().removeClass('has-error');
+        //     }
+        //     $("#changeuserinfowindow").modal("hide");
+        //     $("#changeuserinfowindow input[name='newpwd']").val("");
+        //     $.loadajax({
+        //         url:baseurl+"User/ajaxAdminCPwd",
+        //         type:"post",
+        //         data:{
+        //             id:id,
+        //             pwd:md5(newpwd)
+        //         },
+        //         success:function(res)
+        //         {
+        //             if(res.code == 1)
+        //             {
+        //                 alertSuccess("修改成功");
+        //             }else{
+        //                 alertError(res.msg);
+        //             }
+        //         },
+        //         error:function()
+        //         {
+        //             alertError("请稍后重试");
+        //         }
+        //     })
+        // })
     })
 }

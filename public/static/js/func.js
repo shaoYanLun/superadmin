@@ -33,7 +33,7 @@ function alertSuccess(errormsg)
 	$("body").append(html);
 	$("#error").modal("show");
 }
-var baseurl = "/m/"
+var baseurl = "/m/";
 $.extend({
 	loadajax:function(obj)
 	{
@@ -46,4 +46,65 @@ $.extend({
         }
 		$.ajax(obj);
 	}
+})
+// 修改密码
+$(function(){
+	$("#changeselfpwd").click(function(){
+		var $e = $("#changeselfpwdwindow");
+		$e.modal("show");
+		$e.find(".save").click(function(){
+			var oldpwd = $e.find("input[name='oldpwd']").val();
+			if(!oldpwd)
+			{
+				$e.find("input[name='oldpwd']").parent().parent().addClass('has-error');
+				return false;
+			}else{
+				$e.find("input[name='oldpwd']").parent().parent().removeClass('has-error');
+			}
+			var newpwd = $e.find("input[name='newpwd']").val();
+			if(!newpwd)
+			{
+				$e.find("input[name='newpwd']").parent().parent().addClass('has-error');
+				return false;
+			}else{
+				$e.find("input[name='newpwd']").parent().parent().removeClass('has-error');
+			}
+			$e.modal("hide");
+
+			$.loadajax({
+				url:"/m/User/ajaxChangePwd",
+				type:"post",
+				data:{
+					opwd:md5(oldpwd),
+					npwd:md5(newpwd),
+				},
+				success:function(res){
+					if(res.code==1)
+					{
+						alertSuccess("修改修改，请重新登录");
+						window.location.href="/m/Auth/logout";
+					}else{
+						alertError(res.msg);
+					}
+				},error:function(){
+					alertError("修改失败，请重试");
+				}
+			})
+		})
+	})
+	$("#refreshRight").click(function(){
+		$.loadajax({
+			url:"/m/User/refreshRight",
+			success:function(res){
+				if(res.code==1)
+				{
+					location.reload();
+				}else{
+					alertError(res.msg);
+				}
+			},error:function(){
+				alertError("刷新失败，请重试");
+			}
+		})
+	})
 })

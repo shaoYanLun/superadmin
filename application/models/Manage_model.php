@@ -37,7 +37,7 @@ class Manage_model extends CI_Model {
 	*/
 	function getMenu($arrWhere = array()) {
 
-		$this->_db->order_by('sort', 'desc');
+		$this->_db->order_by('sort', 'asc');
 		$arrWhere = $arrWhere;
 		$arrWhere['type'] = 1;
 		$arrWhere['status'] = 1;

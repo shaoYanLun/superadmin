@@ -51,24 +51,12 @@
 					</a>
 					<ul class="dropdown-menu dropdown-menu-default">
 						<li>
-							<a href="extra_profile.html">
-							<i class="icon-user"></i> My Profile </a>
+							<a href="#" id="changeselfpwd">
+							<i class="icon-lock"></i> 修改密码 </a>
 						</li>
 						<li>
-							<a href="page_calendar.html">
-							<i class="icon-calendar"></i> My Calendar </a>
-						</li>
-						<li>
-							<a href="inbox.html">
-							<i class="icon-envelope-open"></i> My Inbox <span class="badge badge-danger">
-							3 </span>
-							</a>
-						</li>
-						<li>
-							<a href="page_todo.html">
-							<i class="icon-rocket"></i> My Tasks <span class="badge badge-success">
-							7 </span>
-							</a>
+							<a href="#" id="refreshRight">
+							<i class="icon-calendar"></i> 权限刷新 </a>
 						</li>
 						<li class="divider">
 						</li>
@@ -85,6 +73,38 @@
 			</ul>
 		</div>
 	</div>
+</div>
+<div class="modal fade" id="changeselfpwdwindow" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">修改密码</h4>
+            </div>
+            <div class="errormsg">
+            </div>
+            <div class="modal-body form-horizontal">
+                <div class="form-body">
+                	<div class="form-group">
+                        <label class="col-md-3 control-label">原始密码</label>
+                        <div class="col-md-9">
+                            <input type="password" name="oldpwd" class="form-control input-inline input-medium" placeholder="新密码">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">新密码</label>
+                        <div class="col-md-9">
+                            <input type="password" name="newpwd" class="form-control input-inline input-medium" placeholder="新密码">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn default" data-dismiss="modal">放弃</button>
+                <button type="button" class="btn blue save">保存</button>
+            </div>
+        </div>
+    </div>
 </div>
 <div class="clearfix">
 </div>

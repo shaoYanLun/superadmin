@@ -17,6 +17,9 @@
 			<a class="btn btn-xs green pull-right first_menu" href="#">
 				<i class="fa fa-plus"></i> 添加一级目录 
 			</a>
+			<a class="btn btn-xs blue-madison pull-right sort_first_menu" href="#" style="margin-right: 20px;" sort="1">
+				<i class="fa fa-sort-alpha-asc"></i> 一级目录排序
+			</a>
 		</div>
 		<ul class="ver-inline-menu tabbable margin-bottom-10 firstmenulist">
 			<?php
@@ -36,6 +39,7 @@
 					<i style="top:0px" class="icon-plus pull-right second_menu popovers" data-content="没有子目录自动作为访问目录，拥有子目录自动作为分类目录" data-original-title="添加子目录" data-container="body" data-trigger="hover"></i>
 					<i style="top:0px" class="icon-trash pull-right delete_first_menu popovers" data-content="拥有子目录时，无法删除。自动删除已配置权限" data-original-title="删除当前目录" data-container="body" data-trigger="hover"></i>
 					<i style="top:0px" class="icon-note pull-right first_menu" title="修改当前目录"></i> 
+					<i style="top:0px" class="icon-equalizer pull-right sort_first_menu" title="排序"></i> 
 				</a>
 				<span class='<?php echo $active?"after":"";?>'>
 				</span>
@@ -178,7 +182,36 @@
 		</div>
 	</div>
 </div>
+<style type="text/css">
+	.sort li .badge{
+		cursor:pointer;
+	}
+</style>
 <div name="modals">
+	<!-- 一级目录排序 -->
+	<div class="modal fade" id="sort_menu" tabindex="-1" role="basic" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+					<h4 class="modal-title">目录排序</h4>
+				</div>
+				<div class="errormsg">
+				</div>
+				<div class="modal-body form-horizontal">
+					<div class="form-body">
+						<ul class="feeds sort">
+							
+						</ul>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn default" data-dismiss="modal">放弃</button>
+					<button type="button" class="btn blue save">保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
 	<!-- 添加修改一级目录 -->
 	<div class="modal fade" id="firstmenu" tabindex="-1" role="basic" aria-hidden="true">
 		<div class="modal-dialog">
@@ -204,15 +237,17 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label">访问地址</label>
 							<div class="col-md-9">
-								<input type="text" name="url" class="form-control input-inline input-medium" placeholder="格式 class/function">
-								<span class="help-inline">拥有子目录的分类目录不填写</span>
+								<input type="text" name="dir" class="form-control input-inline input-medium" placeholder="目录 默认为空">
+								<input style="margin-top: 10px;" type="text" name="classname" class="form-control input-inline input-medium" placeholder="访问控制器的类名">
+								<input style="margin-top: 10px;" type="text" name="func" class="form-control input-inline input-medium" placeholder="访问的方法名默认index">
+								<span class="help-block">拥有子目录的分类目录不填写</span>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">权限别名</label>
 							<div class="col-md-9">
 								<input type="text" name="action" class="form-control input-inline input-medium" placeholder="不建议填写">
-								<span class="help-inline">不建议填写，默认与访问地址相同</span>
+								<span class="help-block">不建议填写，默认与访问地址相同</span>
 							</div>
 						</div>
 						<div class="form-group menu_icon">
@@ -222,18 +257,16 @@
 								<a data-toggle="modal" href="#fullicon" class="btn btn-xs btn-success">选择图标</a>
 								<i style="margin-left: 10px;position: relative;top: 2px;" aria-hidden="true" class=""></i>
 								<br/>
-								<span class="help-inline">窄屏时只展示图标 可选图标</span>
+								<span class="help-block">窄屏时只展示图标 可选图标</span>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">是否显示</label>
-							<div class="col-md-9">
-								<div class="radio-list">
-									<label class="radio-inline">
-									<div class=""><span class="checked"><input type="radio" name="status" value="1" checked ></span></div> 显示 </label>
-									<label class="radio-inline">
-									<div class=""><span class=""><input type="radio" name="status" value="2"></span></div> 隐藏 </label>
-								</div>
+							<div class="col-md-9 radio-list" style="padding-left: 35px;">
+								<label class="radio-inline">
+								<div class=""><span class="checked"><input type="radio" name="status" value="1" checked ></span></div> 显示 </label>
+								<label class="radio-inline">
+								<div class=""><span class=""><input type="radio" name="status" value="2"></span></div> 隐藏 </label>
 							</div>
 						</div>
 					</div>
@@ -272,14 +305,14 @@
 							<label class="col-md-3 control-label">访问地址</label>
 							<div class="col-md-9">
 								<input type="text" name="url" class="form-control input-inline input-medium" placeholder="格式 class/function">
-								<span class="help-inline">必须填写</span>
+								<span class="help-block">必须填写</span>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">权限别名</label>
 							<div class="col-md-9">
 								<input type="text" name="action" class="form-control input-inline input-medium" placeholder="不建议填写">
-								<span class="help-inline">不建议填写，默认与访问地址相同</span>
+								<span class="help-block">不建议填写，默认与访问地址相同</span>
 							</div>
 						</div>
 						<div class="form-group">
@@ -289,18 +322,16 @@
 								<a data-toggle="modal" href="#fullicon" class="btn btn-xs btn-success">选择图标</a>
 								<i style="margin-left: 10px;position: relative;top: 2px;" aria-hidden="true" class=""></i>
 								<br/>
-								<span class="help-inline">窄屏时只展示图标 可选图标</span>
+								<span class="help-block">窄屏时只展示图标 可选图标</span>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">是否显示</label>
-							<div class="col-md-9">
-								<div class="radio-list">
-									<label class="radio-inline">
-									<div class=""><span class="checked"><input type="radio" name="status" value="1" checked ></span></div> 显示 </label>
-									<label class="radio-inline">
-									<div class=""><span class=""><input type="radio" name="status" value="2"></span></div> 隐藏 </label>
-								</div>
+							<div class="col-md-9 radio-list" style="padding-left: 35px;">
+								<label class="radio-inline">
+								<div class=""><span class="checked"><input type="radio" name="status" value="1" checked ></span></div> 显示 </label>
+								<label class="radio-inline">
+								<div class=""><span class=""><input type="radio" name="status" value="2"></span></div> 隐藏 </label>
 							</div>
 						</div>
 					</div>
@@ -336,7 +367,7 @@
 							<label class="col-md-3 control-label">权限别名</label>
 							<div class="col-md-9">
 								<input type="text" name="action" class="form-control input-inline input-medium" placeholder="必须填写">
-								<span class="help-inline">必须填写且唯一</span>
+								<span class="help-block">必须填写且唯一</span>
 							</div>
 						</div>
 					</div>
