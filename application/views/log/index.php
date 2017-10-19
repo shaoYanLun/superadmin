@@ -57,7 +57,15 @@ echo $_current['mname'];
                     <td><?php echo $value['username'];?></td>
                     <td><?php echo $value['uri'];?></td>
                     <td><?php echo $value['mark'];?></td>
-                    <td><?php echo $value['mark_ext'];?></td>
+                    <td>
+                    
+                    <?php if($j = json_decode($value['mark_ext'],true)):?>
+                      <pre><?php $r = var_export($j,true);echo $r;?></pre>
+                    <?php else:?>
+                    <?php echo $value['mark_ext'];?>
+                    <?php endif;?>
+                    
+                    </td>
                     <td><?php echo $value['ip'];?></td>
                     <td><?php echo $value['ctime'];?></td>
                     </tr>

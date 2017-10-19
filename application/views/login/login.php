@@ -107,8 +107,7 @@ if ($isDis) :
 			<input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Email" name="email"/>
 		</div>
 		<div class="form-actions">
-			<button type="button" id="back-btn" class="btn btn-default">Back</button>
-			<button type="submit" class="btn btn-primary uppercase pull-right">Submit</button>
+
 		</div>
 	</form>
 </div>

@@ -46,7 +46,7 @@ class Auth extends CI_Controller
             }
         }
         $this->User_model->wsession($user);
-        
+        wlog($uname."登录了");
         ajax(1, null, "OK");
     }
 
@@ -58,6 +58,6 @@ class Auth extends CI_Controller
         $this->session->unset_userdata('user_info');
         session_destroy();
         
-        gor("OK");
+        redirect("/");
     }
 }

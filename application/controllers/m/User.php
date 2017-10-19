@@ -64,6 +64,7 @@ class User extends MY_Controller {
 
 		$user = $this->model->addUser($arr);
 		$data['uname'] = $uname;
+		wlog($this->GUSER."添加了用户:".$uname);
 		ajax($user['code'], $data, $user['msg']);
 	}
 
@@ -85,6 +86,7 @@ class User extends MY_Controller {
 		if (!$isS) {
 			ajax(-3, null, "修改密码失败");
 		}
+		wlog($this->GUSER."修改".$uname."的密码");
 		ajax(1, null, "更新成功");
 	}
 

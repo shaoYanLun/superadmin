@@ -15,6 +15,7 @@ class Log extends CI_Controller
 
     function index()
     {
+        wlog("访问日志");
         $this->load->library('page');
         
         $page = new Page();
@@ -25,7 +26,7 @@ class Log extends CI_Controller
         $arrWhere['ls'] = $arrLimit['ls'];
         $arrWhere['le'] = $arrLimit['le'];
         
-        $arrRes = $this->model->getLog($arrWhere);
+        $arrRes = Log_model::getLog($arrWhere);
         
         $all = $arrRes['num'];
         

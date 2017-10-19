@@ -12,7 +12,7 @@ class Config_model extends CI_Model
     function __construct()
     {
         parent::__construct();
-        if (empty($this->_db)) {
+        if (empty(self::$_db)) {
             self::$_db = $this->load->database('default', true);
         }
     }
