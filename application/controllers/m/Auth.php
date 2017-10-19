@@ -58,6 +58,6 @@ class Auth extends CI_Controller
         $this->session->unset_userdata('user_info');
         session_destroy();
         
-        gor("OK");
+        gor();
     }
 }

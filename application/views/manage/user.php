@@ -21,8 +21,10 @@ echo $_current['mname'];
         </li> -->
     </ul>
 </div>
-<div class="alert alert-warning" style="padding: 14px;">
-    用户拥有多个权限组和独立权限时，取并集。
+<div class="note note-success">
+    <p>
+        用户拥有多个权限组和独立权限时，取并集。
+    </p>
 </div>
 <div class="row">
     <div class="col-md-12">
@@ -100,8 +102,10 @@ echo $_current['mname'];
                         </td>
                         <td><?php echo $value['ctime'];?></td>
                         <td><?php echo $value['mtime'];?></td>
-                        <td>修改用户信息</td>
-                        <td>修改密码</td>
+                        <td><button aid="<?php echo $value['id'];?>" class="btn blue-hoki btn-xs changeuserinfo">
+                            <i class="fa fa-edit"></i> 修改用户信息</button></td>
+                        <td><button aid="<?php echo $value['id'];?>" class="btn purple btn-xs changepwd">
+                            <i class="fa fa-lock"></i> 修改密码</button></td>
                         <td>
                             <?php
                             if($value['user_level'] != 4)
@@ -175,6 +179,67 @@ echo $_current['mname'];
             <div class="modal-footer">
                 <button type="button" class="btn default" data-dismiss="modal">放弃</button>
                 <button type="button" class="btn btn-danger sure">删除</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="changepwdwindow" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">修改密码</h4>
+            </div>
+            <div class="errormsg">
+            </div>
+            <div class="modal-body form-horizontal">
+                <div class="form-body">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">新密码</label>
+                        <div class="col-md-9">
+                            <input type="password" name="newpwd" class="form-control input-inline input-medium" placeholder="新密码">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn default" data-dismiss="modal">放弃</button>
+                <button type="button" class="btn blue save">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="changeuserinfowindow" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">修改用户信息</h4>
+            </div>
+            <div class="errormsg">
+            </div>
+            <div class="modal-body form-horizontal">
+                <div class="form-body">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">昵称</label>
+                        <div class="col-md-9">
+                            <input type="text" name="nick_name" class="form-control input-inline input-medium" placeholder="昵称">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">状态</label>
+                        <div class="col-md-9 radio-list" style="padding-left: 35px;">
+                            <label class="radio-inline">
+                            <div class=""><span class=""><input type="radio" name="status" value="2" ></span></div> 正常 </label>
+                            <label class="radio-inline">
+                            <div class=""><span class=""><input type="radio" name="status" value="3"></span></div> 锁定 </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn default" data-dismiss="modal">放弃</button>
+                <button type="button" class="btn blue save">保存</button>
             </div>
         </div>
     </div>

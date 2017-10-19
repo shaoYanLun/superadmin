@@ -98,7 +98,7 @@ if ($isDis) :
 		</div>
 	<!-- END LOGIN FORM -->
 	<!-- BEGIN FORGOT PASSWORD FORM -->
-	<form class="forget-form"  method="post">
+<!-- 	<form class="forget-form"  method="post">
 		<div class="form-title">
 			<span class="form-title">Forget Password ?</span>
 			<span class="form-subtitle" id="errormsg"></span>
@@ -110,7 +110,7 @@ if ($isDis) :
 			<button type="button" id="back-btn" class="btn btn-default">Back</button>
 			<button type="submit" class="btn btn-primary uppercase pull-right">Submit</button>
 		</div>
-	</form>
+	</form> -->
 </div>
 <div class="copyright hide">
 	 2014 © Metronic. Admin Dashboard Template.

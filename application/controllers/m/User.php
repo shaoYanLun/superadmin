@@ -6,7 +6,7 @@ class User extends MY_Controller {
 	function __construct() {
 		parent::__construct();
 		/*
-		* 管理员有访问该目录权限
+			* 管理员有访问该目录权限
 		*/
 		checkRightPage("normaladmin");
 		$class = $this->router->fetch_class();
@@ -69,18 +69,19 @@ class User extends MY_Controller {
 
 	// 管理员修改密码
 	function ajaxAdminCPwd() {
-		checkRightPage();
-		$uname = $this->input->post("uname", true);
+		$uid = $this->input->post('id', true);
+		$arrUser = $this->model->getUserByUid($uid);
+		$loginuUser = checkLogin();
+		if (empty($arrUser) || $loginuUser['level'] <= $arrUser['user_level']) {
+			errorpage('用户不存在或没有操作权限');
+		}
 		$pwd = $this->input->post("pwd", true);
-		if ($uname == "" || $pwd == "") {
+		if ($pwd == "") {
 			ajax(-1, null, "参数错误");
 		}
-		$user = $this->model->getUserByName($uname);
-		if (!$user) {
-			ajax(-2, null, "获取当前用户失败");
-		}
+		$salt = getRand(16);
 		$data['password'] = password($pwd, $salt);
-		$where['username'] = $uname;
+		$where['id'] = $uid;
 		$isS = $this->model->updateUser($data, $where);
 		if (!$isS) {
 			ajax(-3, null, "修改密码失败");
@@ -105,6 +106,7 @@ class User extends MY_Controller {
 			ajax(-2, null, "获取当前用户失败");
 		}
 		$salt = $user['salt'];
+
 		if ($user['password'] != password($opwd, $salt)) {
 			ajax(-3, null, "老密码不正确");
 		}
@@ -353,12 +355,10 @@ class User extends MY_Controller {
 		ajax(1, array(), 'success');
 	}
 
-	function deleteUser()
-	{
+	function deleteUser() {
 		$id = $this->input->get("id", true);
-		if(!$id)
-		{
-			ajax(-1 , array() , "缺少参数");
+		if (!$id) {
+			ajax(-1, array(), "缺少参数");
 		}
 		$arrUser = $this->model->getUserByUid($id);
 		if (empty($arrUser['username'])) {
@@ -372,12 +372,57 @@ class User extends MY_Controller {
 
 		$bool = $this->model->deleteUserById($id);
 
-		if(!$bool)
-		{
-			ajax(-1 , array() , "删除失败");
+		if (!$bool) {
+			ajax(-1, array(), "删除失败");
 		}
 
-		ajax(1 , array() , 'success');
+		ajax(1, array(), 'success');
 
+	}
+	//获取用户信息
+	function getUserinfo()
+	{
+		$id = $this->input->get('id' , true);
+
+		$arrUser = $this->model->getUserByUid($id);
+		if (empty($arrUser['username'])) {
+			ajax(-1, array(), "用户异常");
+		}
+		$userinfo = checkLogin();
+
+		if (empty($arrUser) || $userinfo['level'] <= $arrUser['user_level']) {
+			ajax(-2, array(), '用户不存在或没有操作权限');
+		}
+		ajax(1 , $arrUser , 'success');
+	}
+	//更新用户信息
+	function updatUserinfo(){
+		$postUserInfo = $this->input->post(null , true);
+		if(empty($postUserInfo['id']) ||empty($postUserInfo['nick_name'])||empty($postUserInfo['status']) )
+		{
+			ajax(-1 , array() , '参数错误');
+		}
+		$arrUser = $this->model->getUserByUid($postUserInfo['id']);
+		if (empty($arrUser['username'])) {
+			ajax(-1, array(), "用户异常");
+		}
+		$userinfo = checkLogin();
+
+		if (empty($arrUser) || $userinfo['level'] <= $arrUser['user_level']) {
+			ajax(-2, array(), '用户不存在或没有操作权限');
+		}
+		$arrEdit = array(
+			'nick_name'=>$postUserInfo['nick_name'],
+			'status'=>$postUserInfo['status']
+		);
+		$arrWhere = array(
+			'id'=>$postUserInfo['id']
+		);
+		$bool = $this->model->updateUser($arrEdit , $arrWhere);
+		if(!$bool)
+		{
+			ajax(-1 , array() , '修改失败');
+		}
+		ajax(1 , array() , 'success');
 	}
 }

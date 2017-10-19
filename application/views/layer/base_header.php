@@ -54,11 +54,11 @@
 					</a>
 					<ul class="dropdown-menu dropdown-menu-default">
 						<li>
-							<a href="#">
-							<i class="icon-user"></i> 修改密码 </a>
+							<a href="#" id="changeselfpwd">
+							<i class="icon-lock"></i> 修改密码 </a>
 						</li>
 						<li>
-							<a href="#">
+							<a href="#" id="refreshRight">
 							<i class="icon-calendar"></i> 权限刷新 </a>
 						</li>
 						<li class="divider">
@@ -72,6 +72,38 @@
 			</ul>
 		</div>
 	</div>
+</div>
+<div class="modal fade" id="changeselfpwdwindow" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">修改密码</h4>
+            </div>
+            <div class="errormsg">
+            </div>
+            <div class="modal-body form-horizontal">
+                <div class="form-body">
+                	<div class="form-group">
+                        <label class="col-md-3 control-label">原始密码</label>
+                        <div class="col-md-9">
+                            <input type="password" name="oldpwd" class="form-control input-inline input-medium" placeholder="新密码">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">新密码</label>
+                        <div class="col-md-9">
+                            <input type="password" name="newpwd" class="form-control input-inline input-medium" placeholder="新密码">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn default" data-dismiss="modal">放弃</button>
+                <button type="button" class="btn blue save">保存</button>
+            </div>
+        </div>
+    </div>
 </div>
 <div class="clearfix">
 </div>

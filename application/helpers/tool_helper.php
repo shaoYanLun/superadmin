@@ -96,3 +96,23 @@ function errorpage($msg = "")
     echo $msg;
     exit;
 }
+
+function gor($msg = "", $go = "")
+{
+    $str = "<script>";
+    empty($msg) ? "" : $str .= ("alert('" . $msg . "');");
+    
+    if (empty($go)) {
+        $str .= "history.go(-1)</script>";
+        echo $str;
+        // $strlog= json_encode(array('str'=>$str));
+        // inLog($strlog);
+        exit();
+    } else {
+        $str .= "</script>";
+        echo $str;
+        // $strlog= json_encode(array('str'=>$str,'go'=>$go));
+        // inLog($strlog);
+        redirect($go);
+    }
+}
