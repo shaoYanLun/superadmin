@@ -18,8 +18,7 @@ class MY_Loader extends CI_Loader {
             'header'=>'base_header',
             'footer'=>'base_footer',
         ):"";
-        // $atfunc =  empty($CI->router->fetch_directory() )?"/":"/".$CI->router->fetch_directory();
-        // $atfunc .= $CI->router->fetch_class()."/".$CI->router->fetch_method();
+
         $arrHeaderData = array(
             '_menulist'=>$menulist,
             // '_atfunc'=>$atfunc,

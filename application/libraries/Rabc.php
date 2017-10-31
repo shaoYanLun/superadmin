@@ -78,12 +78,12 @@ class Rabc
         
         $atfunc =  empty($CI->router->fetch_directory() )?"/":"/".$CI->router->fetch_directory();
         $atfunc .= $CI->router->fetch_class()."/".$CI->router->fetch_method();
-        
+        $atfunc = strtolower($atfunc);
         if (! empty($arrMenuList)) {
             $arrLinkMenu = array();
             foreach ($arrMenuList as $key => $arrMenu) {
                 
-                if ($arrMenu['url'] == $atfunc) {
+                if (strtolower($arrMenu['url']) == $atfunc) {
                     $arrCurent = array(
                         'mname' => $arrMenu['mname'],
                         'desription' => $arrMenu['desription'],
