@@ -4,6 +4,7 @@ class Order_model extends CI_Model
 {
     private $_strOrder = 'test_order';
     private $_strGoods = 'test_goods';
+    private $_strUser = 'user';
     private $_db = "";
 
     function __construct()
@@ -39,5 +40,16 @@ class Order_model extends CI_Model
             'list' => $list,
             'num' => $arrCount['num']
         );
+    }
+    
+    function getUser() {
+        $sql = "select *from {$this->_strUser} where user_level<8";
+        $ret = $this->_db->query($sql)->result_array();
+        return $ret;
+    }
+    function getUserById($id) {
+        $sql = "select *from {$this->_strUser} where id=? and user_level<8";
+        $ret = $this->_db->query($sql,array($id))->row_array();
+        return $ret;
     }
 }

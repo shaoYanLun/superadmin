@@ -46,6 +46,9 @@ echo $_current['mname'];
                             <button class="btn blue-madison" type='submit'>查询</button>
                             <form>
                         </label>
+                        <span style='float:right'>
+                          <?php echo $cuser;?>
+                        </span>
                     </div>
                 </div>
 

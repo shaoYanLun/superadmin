@@ -85,7 +85,7 @@ class User_model extends CI_Model
         }
         $right = array();
         if ($baseRight != "") {
-            $right = explode(",", $right);
+            $right = explode(",", $baseRight);
         }
         $sql = "select pm.action from {$this->_strUserGroupRight} ugr left join {$this->_strPlatMenu} pm on ugr.pmid=pm.id where ugr.ugid in ({$group})";
         $action = $this->_db->query($sql , array())->result_array();
