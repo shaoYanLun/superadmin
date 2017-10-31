@@ -102,10 +102,10 @@ class User extends MY_Controller {
 		}
 
 		$arr['uname'] = $uname;
-		$arr['user_level'] = $userlevel;
+		$arr['user_level'] = $user_level;
 		$arr['pwd'] = $pwd;
 		$arr['nick_name'] = $nick_name;
-		if($userlevel==2)
+		if($user_level==2)
 		{
 			$arrRight = c("normaladmin");
 			$strRight = "";
@@ -118,7 +118,6 @@ class User extends MY_Controller {
 			}
 			$arr['user_right'] = $strRight;
 		}
-
 		$user = $this->model->addUser($arr);
 		$data['uname'] = $uname;
 		wlog($this->GUSER."添加了用户:".$uname);

@@ -39,6 +39,7 @@ class User_model extends CI_Model
         }
         $insertData['username'] = $uname;
         $insertData['nick_name'] = $arr['nick_name'];
+        $insertData['user_level'] = $arr['user_level'];
         $insertData['salt'] = getRand(16);
         $insertData['password'] = password($arr['pwd'], $insertData['salt']);
         $insertData['gcode'] = mt_rand(10000000, 99999999);
@@ -85,7 +86,7 @@ class User_model extends CI_Model
         }
         $right = array();
         if ($baseRight != "") {
-            $right = explode(",", $right);
+            $right = explode(",", $baseRight);
         }
         $sql = "select pm.action from {$this->_strUserGroupRight} ugr left join {$this->_strPlatMenu} pm on ugr.pmid=pm.id where ugr.ugid in ({$group})";
         $action = $this->_db->query($sql , array())->result_array();

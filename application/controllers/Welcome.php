@@ -22,6 +22,6 @@ class Welcome extends MY_Controller
      */
     public function index()
     {
-        redirect('/m/user/index');
+        $this->load->myview("welcome");
     }
 }
