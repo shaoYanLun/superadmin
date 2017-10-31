@@ -25,11 +25,12 @@ $(function(){
 			}
 		})
 	})
-	$(".delete").one("click",function(){
+	$(".delete").on("click",function(){
         var obj = this;
         $("#delete").modal("show");
         var id = $(this).attr("aid");
-        $("#delete .sure").one("click",function(){
+        $("#delete .sure").off();
+        $("#delete .sure").on("click",function(){
 
             $("#delete").modal("hide");
             $.loadajax({

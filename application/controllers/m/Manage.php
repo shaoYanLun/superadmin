@@ -123,7 +123,11 @@ class Manage extends MY_Controller {
             $arrWhere = array(
                 'action' => $arrGet['action']
             );
-            
+            $kwa = c("keyword_action");
+
+            if(in_array(strtolower($arrGet['action']), $kwa)){
+                ajax(- 1, array(), '权限别名为关键词，请重新定义');
+            }
             $arrRes = $this->model->getMenuByWhere($arrWhere);
             if (! empty($arrRes[0])) {
                 ajax(- 1, array(), '权限别名已存在，请重新定义');
@@ -193,7 +197,11 @@ class Manage extends MY_Controller {
             $arrWhere = array(
                 'action' => $arrGet['action']
             );
-            
+            $kwa = c("keyword_action");
+
+            if(in_array(strtolower($arrGet['action']), $kwa)){
+                ajax(- 1, array(), '权限别名为关键词，请重新定义');
+            }
             $arrRes = $this->model->getMenuByWhere($arrWhere);
             if (! empty($arrRes[0])) {
                 ajax(- 1, array(), '权限别名已存在，请重新定义');
@@ -408,6 +416,11 @@ class Manage extends MY_Controller {
         
         if (empty($arrGet['action'])) {
             ajax(- 1, array(), '必须填写权限别名');
+        }
+        $kwa = c("keyword_action");
+
+        if(in_array(strtolower($arrGet['action']), $kwa)){
+            ajax(- 1, array(), '权限别名为关键词，请重新定义');
         }
         if (! empty($arrGet['mname'])) {
             $arrWhere = array(

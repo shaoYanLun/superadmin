@@ -22,6 +22,10 @@ class User_model extends CI_Model
             $this->_db = $this->load->database('default', true);
         }
     }
+    // function testinsert($arr)
+    // {
+    //     $this->_db->insert("goods" , $arr);
+    // }
 
     function addUser($arr)
     {

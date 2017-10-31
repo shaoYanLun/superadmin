@@ -17,6 +17,6 @@ class MY_Controller extends CI_Controller
         if (! $userInfo) {
             redirect("/m/auth/index");
         }
-        return $userInfo;
+        return $userInfo['username'];
     }
 }

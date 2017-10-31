@@ -12,7 +12,51 @@ class User extends MY_Controller {
 		$class = $this->router->fetch_class();
 		$this->load->model("{$class}_model", "model", true);
 	}
+	// function testinsert()
+	// {
+	// 	for ($i=0; $i < 20; $i++) {
+	//         $strDate = date('YmdH', time());
+	//         $intOrderIdRandom = mt_rand(10000000, 99999999);
+	// 		$order = "9001" . $strDate . $intOrderIdRandom;
+	// 		$status = mt_rand(1,2);
+	// 		$paytime = $status == 2?date("Y-m-d H:i:s" , time()+86400*mt_rand(1,10)):null;
+	// 		$ctime = empty($paytime)?date("Y-m-d H:i:s" , time()+86400*mt_rand(1,10)):date("Y-m-d H:i:s" , strtotime($paytime)+mt_rand(500,3600));
+	// 		$mtime = empty($paytime)?$ctime:$paytime;
+	// 		$gid =mt_rand(1,20);
 
+	// 		$arr = array(
+	// 			'order_id'=>$order,
+	// 			'gid'=>$gid,
+	// 			'status'=>$status,
+	// 			'price'=>1000,
+	// 			'pay'=>1000,
+	// 			'pay_time'=>$paytime,
+	// 			'ctime'=>$ctime,
+	// 			'mtime'=>$mtime,
+	// 		);
+	// 		$this->model->testinsert($arr);
+	// 	}
+	// }
+	// function testinsert()
+	// {
+	// 	for ($i=1; $i <= 20; $i++) {
+	//         $strDate = date('YmdH', time());
+	//         $intOrderIdRandom = mt_rand(10000000, 99999999);
+	// 		$order = "9001" . $strDate . $intOrderIdRandom;
+	// 		$status = mt_rand(1,2);
+	// 		$paytime = date("Y-m-d H:i:s" , time()+86400*mt_rand(1,10));
+
+	// 		$arr = array(
+	// 			'name'=>"商品".$i,
+	// 			'price'=>1000,
+	// 			'num'=>mt_rand(1,100),
+	// 			'status'=>1,
+	// 			'ctime'=>$paytime,
+	// 			'mtime'=>$paytime,
+	// 		);
+	// 		$this->model->testinsert($arr);
+	// 	}
+	// }
 	function index() {
 		$this->load->library('page');
 
@@ -61,6 +105,19 @@ class User extends MY_Controller {
 		$arr['user_level'] = $userlevel;
 		$arr['pwd'] = $pwd;
 		$arr['nick_name'] = $nick_name;
+		if($userlevel==2)
+		{
+			$arrRight = c("normaladmin");
+			$strRight = "";
+			if(!empty($arrRight))
+			{
+				foreach ($arrRight as $key => $value) {
+					$strRight.=$value['action'].",";
+				}
+				$strRight = substr($strRight,0, -1);
+			}
+			$arr['user_right'] = $strRight;
+		}
 
 		$user = $this->model->addUser($arr);
 		$data['uname'] = $uname;
@@ -282,7 +339,7 @@ class User extends MY_Controller {
 		ajax(1, $data, 'success');
 	}
 	/*
-		        保存用户权限
+		保存用户权限
 	*/
 	function saveUserRight() {
 		$uid = $this->input->post('uid', true);
@@ -343,6 +400,19 @@ class User extends MY_Controller {
 			ajax(-4, array(), '超出可分配权限范围');
 		}
 
+		if($arrUser['user_level'] == 2)
+		{
+			$arrRight = c("normaladmin");
+			$strNormaladminRight = "";
+			if(!empty($arrRight))
+			{
+				foreach ($arrRight as $key => $value) {
+					$strNormaladminRight.=$value['action'].",";
+				}
+				$strNormaladminRight = substr($strNormaladminRight,0, -1);
+			}
+			$strRight?$strRight.=",".$strNormaladminRight:$strRight=$strNormaladminRight;
+		}
 		$arrEdit = array(
 			'user_group' => $strGroup,
 			'user_right' => $strRight,

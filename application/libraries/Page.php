@@ -46,6 +46,14 @@ class Page{
 	*/
 	function view( $arrPage = array('all'=> 0 ) , $arrWhere = array() )
 	{
+		$arrGet = $_GET;
+
+		if(!empty($arrGet))
+		{
+			foreach ($arrGet as $key => $value) {
+				!isset($arrWhere[$key]) && $arrWhere[$key] = $value;
+			}
+		}
 	    $num = empty($this->num) ? 50 : $this->num;
 	    //总页数
 	    $all_page = empty($arrPage['all']) ? 1 : intval(ceil($arrPage['all'] / $num));

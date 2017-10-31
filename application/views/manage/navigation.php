@@ -237,9 +237,7 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label">访问地址</label>
 							<div class="col-md-9">
-								<input type="text" name="dir" class="form-control input-inline input-medium" placeholder="目录 默认为空">
-								<input style="margin-top: 10px;" type="text" name="classname" class="form-control input-inline input-medium" placeholder="访问控制器的类名">
-								<input style="margin-top: 10px;" type="text" name="func" class="form-control input-inline input-medium" placeholder="访问的方法名默认index">
+								<input type="text" name="url" class="form-control input-inline input-medium" placeholder="格式 class/function">
 								<span class="help-block">拥有子目录的分类目录不填写</span>
 							</div>
 						</div>

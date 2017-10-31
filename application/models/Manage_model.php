@@ -31,9 +31,9 @@ class Manage_model extends CI_Model {
 	}
 
 	/*
-		        获取目录
-		        正式环境隐藏系统目录
-		        $arrWhere['system'] = 2
+		获取目录
+		正式环境隐藏系统目录
+		$arrWhere['system'] = 2
 	*/
 	function getMenu($arrWhere = array()) {
 

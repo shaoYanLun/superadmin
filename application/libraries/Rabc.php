@@ -5,6 +5,7 @@ class Rabc
 
     public function check($a)
     {
+        $a = strtolower($a);
         $ci = & get_instance();
         $ci->load->library('session');
         $userinfo = $ci->session->userdata("user_info");
@@ -50,6 +51,22 @@ class Rabc
         $CI->load->model('Manage_model');
         
         $arrMenuList = $CI->Manage_model->getMenu();
+
+        //是否为管理员
+        if(!$this->check(''))
+        {
+            $CI = & get_instance();
+            $CI->load->library('session');
+            $userinfo = $CI->session->userdata("user_info");
+            $right = $userinfo['right'];
+            $arrRight = json_decode($right, true);
+            foreach ($arrMenuList as $key => $value) {
+                if(!empty($value['action']) && !in_array($value['action'], $arrRight))
+                {
+                    unset($arrMenuList[$key]);
+                }
+            }
+        }
         
         $arrRes = array();
         $arrCurent = array(
@@ -90,5 +107,16 @@ class Rabc
             "arrmenu" => $arrRes,
             "current" => $arrCurent
         );
+    }
+    //获取当前访问方法
+    function getCurrentFunc()
+    {
+        $CI =& get_instance();
+
+        $resFunc = "";
+
+        $resFunc = empty($CI->router->fetch_directory() )?"/":"/".$CI->router->fetch_directory();
+        $resFunc .= $CI->router->fetch_class()."/".$CI->router->fetch_method();
+        return strtolower($resFunc);
     }
 }

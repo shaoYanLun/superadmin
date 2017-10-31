@@ -79,11 +79,8 @@ $(function(){
 				$e.find("input[name='icon']").parent().parent().removeClass('has-error');
 			}
 			var id = $e.find("input[name='id']").val();
-			// var url = $e.find("input[name='url']").val();
+			var url = $e.find("input[name='url']").val();
 			var action = $e.find("input[name='action']").val();
-			var dir = $e.find("input[name='dir']").val();
-			var classname = $e.find("input[name='classname']").val();
-			var func = $e.find("input[name='func']").val();
 			var radio = 1;
 			$e.find("input[name='status']").each(function(){
 				if ($(this).attr("checked") )
@@ -93,9 +90,7 @@ $(function(){
 			});
 			var param = {
 				mname:mname,
-				dir:dir,
-				classname:classname,
-				func:func,
+				url:url,
 				icon:icon,
 				action:action,
 				radio:radio,
