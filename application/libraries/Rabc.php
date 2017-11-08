@@ -48,7 +48,7 @@ class Rabc
     {
         $CI = &get_instance();
         
-        $CI->load->model('Manage_model');
+        $CI->load->model('admin/Manage_model');
         
         $arrMenuList = $CI->Manage_model->getMenu();
         

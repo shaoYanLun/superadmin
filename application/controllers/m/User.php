@@ -10,7 +10,7 @@ class User extends MY_Controller {
 		*/
 		checkRightPage("normaladmin");
 		$class = $this->router->fetch_class();
-		$this->load->model("{$class}_model", "model", true);
+		$this->load->model("admin/{$class}_model", "model", true);
 	}
 	// function testinsert()
 	// {
@@ -254,7 +254,7 @@ class User extends MY_Controller {
 			ajax(-3, array(), '该用户不允许权限分配');
 		}
 
-		$this->load->model('Manage_model');
+		$this->load->model('admin/Manage_model');
 
 		$arrWhere['system'] = 2;
 

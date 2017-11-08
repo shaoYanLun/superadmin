@@ -29,7 +29,7 @@ class Auth extends CI_Controller
             ajax(- 1, null, "用户名或密码不能为空");
         }
         
-        $this->load->model("User_model");
+        $this->load->model("admin/User_model");
         // 此处可以用redis加入防刷机制
         $user = $this->User_model->getUserByName($uname);
         

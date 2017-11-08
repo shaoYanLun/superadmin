@@ -12,7 +12,7 @@ class Config extends CI_Controller
 
     function index()
     {
-        $this->load->model("Config_model");
+        $this->load->model("admin/Config_model");
         $allConfig = Config_model::getAllConfig();
         
         $data['config'] = $allConfig;
@@ -35,7 +35,7 @@ class Config extends CI_Controller
         if ($isExist != "") {
             ajax(- 2, null, "新添加的变量key已经存在，请更换一个key");
         }
-        $this->load->model("Config_model");
+        $this->load->model("admin/Config_model");
         $arr['cname'] = $cname;
         $arr['ckey'] = $ckey;
         $arr['cvalue'] = $cvalue;
@@ -56,7 +56,7 @@ class Config extends CI_Controller
         if ($id == "") {
             ajax(- 1, null, "参数不能为空");
         }
-        $this->load->model("Config_model");
+        $this->load->model("admin/Config_model");
         $config = Config_model::getConfigById($id);
         if (! $config) {
             ajax(- 2, null, "你删除的配置不存在");
@@ -83,7 +83,7 @@ class Config extends CI_Controller
         if ($cname == "" || $ckey == "" || $cvalue == "" || $id == "") {
             ajax(- 1, null, "参数不能为空");
         }
-        $this->load->model("Config_model");
+        $this->load->model("admin/Config_model");
         $config = Config_model::getConfigById($id);
         if (! $config) {
             ajax(- 2, null, "你更新的配置不存在");

@@ -8,7 +8,7 @@ class Group extends MY_Controller {
 		//超级管理员 或 管理员有访问权限
 		checkRightPage();
 		$class = $this->router->fetch_class();
-		$this->load->model("{$class}_model", "model", true);
+		$this->load->model("admin/{$class}_model", "model");
 	}
 	function index() {
 		$arrUser = $this->model->getUserGroup();
@@ -55,7 +55,7 @@ class Group extends MY_Controller {
             errorpage( "不存在的权限组");
         }
 
-        $this->load->model('Manage_model');
+        $this->load->model('admin/Manage_model');
 
         $arrWhere = array(
             'system' => 2,
