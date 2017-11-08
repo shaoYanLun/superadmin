@@ -34,11 +34,15 @@ echo $_current['mname'];
                 <div class="row table-toolbar">
                     <div class="col-md-6">
                         <div class="btn-group">
-
-                            </a>
+                        <form action='' method='get'>
+                           <input type="text"  name="st" value="<?php echo $st;?>" class="Wdate form-control" style="width: 140px; height: 28px; cursor: pointer;display:inline" onclick="WdatePicker();">
+                        -<input type="text"  name="et" value="<?php echo $et;?>" class="Wdate form-control" style="width: 140px; height: 28px; cursor: pointer;display:inline" onclick="WdatePicker();">
+                        <button class="btn blue-madison" type="submit">查询</button>
+                       </form>
                         </div>
                     </div>
                 </div>
+               
                 <div class="table-responsive">
                      <table class="table table-striped table-bordered table-hover">
                     <thead>
@@ -73,7 +77,19 @@ echo $_current['mname'];
                     </tbody>
                     </table>
                 </div>
-            </div>
+                    <div class="row">
+    <div class="col-md-12">
+        <div class="pull-right">
+            <?php
+            echo $page_view;
+            ?>
         </div>
     </div>
+</div>
+            </div>
+            
+        </div>
+        
+    </div>
+
 </div>

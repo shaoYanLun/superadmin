@@ -14,7 +14,7 @@ class Log_model extends CI_Model
         }
     }
 
-    public static function  getLog() {
+    public static function  getLog($arr) {
         $p = "*";
         $sql = " select {$p} from ".self::$_strOpLog." where 1=1  ";
         $sqlNum = " select count(*) as num from ".self::$_strOpLog."  where 1=1 ";
@@ -22,12 +22,26 @@ class Log_model extends CI_Model
         $arrWhere = array();
         $arrWhereNum = array();
         
+        if (isset($arr['st'])) {
+            $sql.=" and ctime>?";
+            $sqlNum.=" and ctime>?";
+            $arrWhere[] = $arr['st'];
+            $arrWhereNum[] = $arr['st'];
+            
+        }
+        if (isset($arr['et'])) {
+            $sql.=" and ctime<=?";
+            $arrWhere[] = $arr['et'];
+            $sqlNum.=" and ctime<=?";
+            $arrWhereNum[] = $arr['et'];
+        }
+        
+        $sql.=" order by id desc ";
         if (isset($arr['ls'])) {
             $sql .= " limit ? , ?";
             $arrWhere[] = $arr['ls'];
             $arrWhere[] = $arr['le'];
         }
-        $sql.=" order by id desc ";
         $list = self::$_db->query($sql, $arrWhere)->result_array();
         $arrCount = self::$_db->query($sqlNum, $arrWhereNum)->row_array();
         

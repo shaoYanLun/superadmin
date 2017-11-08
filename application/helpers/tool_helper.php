@@ -106,7 +106,7 @@ function errorpage($msg = "")
  */
 function wlog($mark,$ext="") {
     $ci = & get_instance();
-    $ci->load->model("Log_model");
+    $ci->load->model("admin/Log_model");
     $newExt = $ext;
     if (is_array($ext)) {
         $newExt = json_encode($ext);

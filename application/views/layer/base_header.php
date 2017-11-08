@@ -21,7 +21,9 @@
 <link href="<?=static_url('pages/css/layout.css')?>" rel="stylesheet" type="text/css"/>
 <link href="<?=static_url('global/plugins/uniform/css/uniform.default.css')?>" rel="stylesheet" type="text/css"/>
 <script src="<?=static_url('global/plugins/jquery.min.js')?>" type="text/javascript"></script>
+<link href="<?=static_url('/js/WDatePicker/skin/WdatePicker.css')?>" rel="stylesheet" type="text/css">
 <link id="style_color" href="<?=static_url('pages/css/themes/default.css')?>" rel="stylesheet" type="text/css"/>
+
 <!-- END THEME STYLES -->
 <!-- <link rel="shortcut icon" href="favicon.ico"/> -->
 </head>

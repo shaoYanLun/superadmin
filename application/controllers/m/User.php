@@ -132,6 +132,7 @@ class User extends MY_Controller {
 		if (empty($arrUser) || $loginuUser['level'] <= $arrUser['user_level']) {
 			errorpage('用户不存在或没有操作权限');
 		}
+		$uname = $arrUser['username'];
 		$pwd = $this->input->post("pwd", true);
 		if ($pwd == "") {
 			ajax(-1, null, "参数错误");
