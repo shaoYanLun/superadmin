@@ -78,9 +78,16 @@ $(function(){
 			}else{
 				$e.find("input[name='icon']").parent().parent().removeClass('has-error');
 			}
+			var action = $e.find("input[name='action']").val();
+			// if(!action)
+			// {
+			// 	$e.find("input[name='action']").parent().parent().addClass('has-error');
+			// 	return false;
+			// }else{
+			// 	$e.find("input[name='action']").parent().parent().removeClass('has-error');
+			// }
 			var id = $e.find("input[name='id']").val();
 			var url = $e.find("input[name='url']").val();
-			var action = $e.find("input[name='action']").val();
 			var radio = 1;
 			$e.find("input[name='status']").each(function(){
 				if ($(this).attr("checked") )
@@ -111,7 +118,7 @@ $(function(){
 						return false;
 					}
 					$e.find(".close").click();
-					location.onload();
+					location.reload();
 				},
 				error:function()
 				{
@@ -147,7 +154,8 @@ $(function(){
 			var html = "为<span style='color:#d64635;font-weight: 900;'>"+aname+"</span>添加子目录";
 			$e.find("h4").html(html);
 			$e.modal("show");
-			$e.find(".save").click(es)
+			$e.find(".save").off();
+			$e.find(".save").on("click",es);
 			return false;
 		}
 		function es()
@@ -237,7 +245,8 @@ $(function(){
 				$e.find("input[name='status']").each(function(){
 					$(this).val() == data['status']?$(this).attr('checked',true):$(this).attr('checked',false);
 				})
-				$e.find(".save").click(ed);
+				$e.find(".save").off();
+				$e.find(".save").on("click",ed);
 			},
 			error:function()
 			{
@@ -323,7 +332,8 @@ $(function(){
 		var html = "<span style='color:#d64635;font-weight: 900;'>添加权限</span> ";
 		$e.find("h4").html(html);
 		$e.modal("show");
-		$e.find(".save").click(ad);
+		$e.find(".save").off();
+		$e.find(".save").on("click",ad);
 		function ad()
 		{
 			var action = $e.find("input[name='action']").val();
@@ -372,9 +382,11 @@ $(function(){
 		var html = "确认删除 <span style='color:#d64635;font-weight: 900;'>"+aname+" </span> ?";
 		$e.find("h4").html(html);
 		$e.modal("show");
-		$e.find(".deletesure").click(de);
+		$e.find(".deletesure").off();
+		$e.find(".deletesure").on("click",de);
 		function de()
 		{
+			$e.modal("hide");
 			$.ajax({
 				url:baseurl+"Manage/deleteMenu?id="+aid,
 				success:function(res)
@@ -382,6 +394,7 @@ $(function(){
 					if(res.code!=1)
 					{
 						alertError(res.msg);
+						return false;
 					}
 					location.reload();
 				},

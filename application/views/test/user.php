@@ -1,9 +1,10 @@
 <select class='form-control input-inline' id='changeuser'>
 <option value='-1'>--切换用户(测试权限使用)</option>
+<option value="1">admin</option>
 <?php foreach($user as $key=>$value):?>
 <option value="<?php echo $value['id'];?>"><?php echo $value['username'];?></option>
 <?php endforeach;?>
-</select><span>切换用户只限测试使用,正式的时候，需要把此接口删掉</span>
+</select><span> 切换用户只限测试使用,正式的时候，需要把此接口删掉</span>
 
 <script>
 $(document).ready(function(){

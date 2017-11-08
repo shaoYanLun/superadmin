@@ -133,6 +133,9 @@ class Manage extends MY_Controller {
                 ajax(- 1, array(), '权限别名已存在，请重新定义');
             }
         }
+        // if (empty($arrGet['action'])) {
+        //     ajax(- 1, array(), '权限别称必须填写');
+        // }
         $arrInsert = array(
             "mname" => $arrGet['mname'],
             "url" => empty($arrGet['url']) ? "" : $arrGet['url'],
@@ -157,6 +160,13 @@ class Manage extends MY_Controller {
     function addsecondmenu()
     {
         $arrGet = $this->input->get(null, true);
+
+        $system = $this->issystemmenu($arrGet['parent']);
+
+        if($system && !checkRight("superadmin"))
+        {
+            ajax(- 1, array(), '系统目录，没有操作权限');
+        }
         if (empty($arrGet['parent'])) {
             ajax(- 1, array(), '缺少父级目录ID');
         }
@@ -229,6 +239,15 @@ class Manage extends MY_Controller {
     function deleteMenu()
     {
         $id = $this->input->get('id', true);
+
+
+        $system = $this->issystemmenu($id);
+
+        if($system && !checkRight("superadmin"))
+        {
+            ajax(- 1, array(), '系统目录，没有操作权限');
+        }
+
         $arrWhere = array(
             'id' => $id
         );
@@ -282,7 +301,21 @@ class Manage extends MY_Controller {
     function editFirstMenu()
     {
         $arrGet = $this->input->get(null, true);
+
+        if (empty($arrGet['id'])) {
+            ajax(- 1, array(), '参数错误');
+        }
+
         $id = $arrGet['id'];
+
+        $system = $this->issystemmenu($id);
+
+        if($system && !checkRight("superadmin"))
+        {
+            ajax(- 1, array(), '系统目录，没有操作权限');
+        }
+
+
         if (empty($arrGet['mname'])) {
             ajax(- 1, array(), '必须填写目录名');
         }
@@ -348,7 +381,18 @@ class Manage extends MY_Controller {
     function editSecondMenu()
     {
         $arrGet = $this->input->get(null, true);
+        if (empty($arrGet['id'])) {
+            ajax(- 1, array(), '参数错误');
+        }
         $id = $arrGet['id'];
+
+        $system = $this->issystemmenu($id);
+
+        if($system && !checkRight("superadmin"))
+        {
+            ajax(- 1, array(), '系统目录，没有操作权限');
+        }
+
         if (empty($arrGet['mname'])) {
             ajax(- 1, array(), '必须填写目录名');
         }
@@ -413,6 +457,15 @@ class Manage extends MY_Controller {
         if (empty($arrGet['parent'])) {
             ajax(- 1, array(), '缺少父级目录ID');
         }
+
+
+        $system = $this->issystemmenu($arrGet['parent']);
+
+        if($system && !checkRight("superadmin"))
+        {
+            ajax(- 1, array(), '系统目录，没有操作权限');
+        }
+        
         
         if (empty($arrGet['action'])) {
             ajax(- 1, array(), '必须填写权限别名');
@@ -493,5 +546,15 @@ class Manage extends MY_Controller {
             }
         }
         ajax(1 , array() , 'success');
+    }
+    //是否为系统目录 是 true
+    function issystemmenu($id)
+    {
+        $list = $this->model->getMenuByWhere(array('id'=>$id));
+        if(empty($list[0]) || $list[0]['system']!=1)
+        {
+            return false;
+        }
+        return true;
     }
 }

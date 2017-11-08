@@ -88,12 +88,15 @@ class User_model extends CI_Model
         if ($baseRight != "") {
             $right = explode(",", $baseRight);
         }
-        $sql = "select pm.action from {$this->_strUserGroupRight} ugr left join {$this->_strPlatMenu} pm on ugr.pmid=pm.id where ugr.ugid in ({$group})";
-        $action = $this->_db->query($sql , array())->result_array();
-        if ($action) {
-            foreach ($action as $value) {
-                $right[] = $value['action'];
-            }
+        if($group)
+        {
+            $sql = "select pm.action from {$this->_strUserGroupRight} ugr left join {$this->_strPlatMenu} pm on ugr.pmid=pm.id where ugr.ugid in ({$group})";
+            $action = $this->_db->query($sql , array())->result_array();
+            if ($action) {
+                foreach ($action as $value) {
+                    $right[] = $value['action'];
+                }
+            }            
         }
         $jsonRight = json_encode($right);
         return $jsonRight;

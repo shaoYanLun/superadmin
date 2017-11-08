@@ -84,6 +84,10 @@ if ($isDis) :
 		<?php endif;
 
 ?>
+		<div class="login-options">
+			<h4>测试账号 admin</h4>
+			<h4>测试密码 admin</h4>
+		</div>
 		<div class="form-actions">
 			<button type="submit" class="btn btn-primary btn-block uppercase">Login</button>
 		</div>

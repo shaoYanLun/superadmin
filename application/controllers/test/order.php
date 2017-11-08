@@ -13,8 +13,8 @@ class Order extends MY_Controller
     }
     function index(){
     	//权限判断
-//     	$currentFunc = $this->rabc->getCurrentFunc();
-//     	checkRightPage($currentFunc);
+    	$currentFunc = $this->rabc->getCurrentFunc();
+    	checkRightPage($currentFunc);
     	$arrWhere = $this->input->get(null, true);
     	$this->load->library('page');
 
@@ -47,7 +47,7 @@ class Order extends MY_Controller
             ajax(-1,null,"参数错误");
         }
         
-        $user = $this->model->getUserById($id);
+        $user = $this->model->testgetUserById($id);
         if (!$user) {
             ajax(-2,null,"切换的用户不存在或者权限太高你无法操作");
         }
