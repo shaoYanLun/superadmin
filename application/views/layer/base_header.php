@@ -7,7 +7,7 @@
 <!-- BEGIN HEAD -->
 <head>
 <meta charset="utf-8"/>
-<title>Metronic | Data Tables - Basic Datatables</title>
+<title>后台管理系统</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8">
@@ -30,13 +30,10 @@
 <div class="page-header navbar navbar-fixed-top">
 	<!-- BEGIN HEADER INNER -->
 	<div class="page-header-inner">
-		<!-- BEGIN LOGO -->
-		<div class="page-logo">
-			<a href="/">
-			<img src="<?=static_url('pages/img/logo.png')?>" alt="logo" class="logo-default"/>
-			</a>
-			<div class="menu-toggler sidebar-toggler hide">
-			</div>
+		<div class="page-logo" style="font-size: 17px;margin-top: 10px;font-weight: 800;color: white;">
+               后台管理 <span style="color:#d64635;">系统</span>        
+        </div>
+		<div class="menu-toggler sidebar-toggler hide">
 		</div>
 		<a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
 		</a>
@@ -116,7 +113,7 @@
 					</div>
 				</li>
 				<li class="sidebar-search-wrapper">
-					<form class="sidebar-search " action="extra_search.html" method="POST">
+					<form class="sidebar-search " action="/">
 						<a href="javascript:;" class="remove">
 						<i class="icon-close"></i>
 						</a>

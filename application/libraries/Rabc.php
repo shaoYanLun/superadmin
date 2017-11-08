@@ -51,22 +51,6 @@ class Rabc
         $CI->load->model('Manage_model');
         
         $arrMenuList = $CI->Manage_model->getMenu();
-
-        //是否为管理员
-        if(!$this->check(''))
-        {
-            $CI = & get_instance();
-            $CI->load->library('session');
-            $userinfo = $CI->session->userdata("user_info");
-            $right = $userinfo['right'];
-            $arrRight = json_decode($right, true);
-            foreach ($arrMenuList as $key => $value) {
-                if(!empty($value['action']) && !in_array($value['action'], $arrRight))
-                {
-                    unset($arrMenuList[$key]);
-                }
-            }
-        }
         
         $arrRes = array();
         $arrCurent = array(
@@ -102,7 +86,37 @@ class Rabc
                 }
             }
         }
-        
+        //是否为管理员
+        if(!$this->check(''))
+        {
+            $CI = & get_instance();
+            $CI->load->library('session');
+            $userinfo = $CI->session->userdata("user_info");
+            $right = $userinfo['right'];
+            $arrRight = json_decode($right, true);
+            foreach ($arrRes as $key => $info) {
+                if(!empty($info['_list']) )
+                {
+                    foreach ($info['_list'] as $k => $v) {
+                        if(!empty($v['action']) && !in_array($v['action'], $arrRight))
+                        {
+                            unset($arrRes[$key]['_list'][$k]);
+                            unset($info['_list'][$k]);
+                        }
+                    }
+                    if(empty($info['_list']))
+                    {
+                        unset($arrRes[$key]);
+                    }
+                }else{
+                    if(!empty($info['action']) && !in_array($info['action'], $arrRight))
+                    {
+                        unset($arrRes[$key]);
+                    }
+                }
+
+            }
+        }
         return array(
             "arrmenu" => $arrRes,
             "current" => $arrCurent

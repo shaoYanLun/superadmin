@@ -237,15 +237,15 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label">访问地址</label>
 							<div class="col-md-9">
-								<input type="text" name="url" class="form-control input-inline input-medium" placeholder="格式 class/function">
-								<span class="help-block">拥有子目录的分类目录不填写</span>
+								<input type="text" name="url" class="form-control input-inline input-medium" placeholder="格式 /class/function">
+								<span class="help-block">拥有子目录的分类目录可不填写</span>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">权限别名</label>
 							<div class="col-md-9">
-								<input type="text" name="action" class="form-control input-inline input-medium" placeholder="不建议填写">
-								<span class="help-block">不建议填写，默认与访问地址相同</span>
+								<input type="text" name="action" class="form-control input-inline input-medium" placeholder="必须填写">
+								<span class="help-block">默认与访问地址相同</span>
 							</div>
 						</div>
 						<div class="form-group menu_icon">
@@ -309,8 +309,8 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label">权限别名</label>
 							<div class="col-md-9">
-								<input type="text" name="action" class="form-control input-inline input-medium" placeholder="不建议填写">
-								<span class="help-block">不建议填写，默认与访问地址相同</span>
+								<input type="text" name="action" class="form-control input-inline input-medium" placeholder="默认与访问地址相同">
+								<span class="help-block">默认与访问地址相同</span>
 							</div>
 						</div>
 						<div class="form-group">

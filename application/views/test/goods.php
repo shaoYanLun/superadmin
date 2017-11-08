@@ -53,9 +53,24 @@ echo $_current['mname'];
                         <th>状态</th>
                         <th>创建时间</th>
                         <th>更新时间</th>
+                        <?php
+                        if(checkRight("editgoods"))
+                        {
+                        ?>
                         <th>编辑</th>
+                        <?php
+                        }
+                        if(checkRight("pullgoods")){
+                        ?>
                         <th>上/下架</th>
+                        <?php
+                        }
+                        if(checkRight("deletegoods")){
+                        ?>
                         <th>删除</th>
+                        <?php
+                        }
+                        ?>
                     </tr>
                     </thead>
                     <tbody>
@@ -77,21 +92,21 @@ echo $_current['mname'];
                         </td>
                         <td><?php echo $value['ctime'];?></td>
                         <td><?php echo $value['mtime'];?></td>
+                        <?php
+                        if(checkRight("editgoods"))
+                        {
+                        ?>
                         <td>
-                            <?php
-                            if(checkRight("editgoods"))
-                            {
-                            ?>
                             <button aid="<?php echo $value['id'];?>" class="btn blue-madison btn-xs editGoods">
                             <i class="fa fa-edit"></i>
                             编辑</button>
-                            <?php
-                            }
-                            ?>
                         </td>
+                        <?php
+                        }
+                        if(checkRight("pullgoods")){
+                        ?>
                         <td>
                             <?php
-                            if(checkRight("pullgoods")){
                                 if($value['status'] == 1)
                                 {
                                 ?>
@@ -108,23 +123,22 @@ echo $_current['mname'];
                                 </button>
                                 <?php
                                 }
-                            }
                             ?>
                         </td>
+                        <?php
+                        }
+                        if(checkRight("deletegoods"))
+                        {
+                        ?>
                         <td>
-                            <?php
-                            if(checkRight("deletegoods"))
-                            {
-                            ?>
                             <button aid="<?php echo $value['id'];?>" class="btn btn-danger delete btn-xs">
                             <i class="fa fa-trash-o"></i>
                             删除
                             </button>
-                            <?php
-                            }
-                            ?>
-                            
                         </td>
+                        <?php
+                        }
+                        ?>
                     </tr>
                     <?php
                         }
@@ -230,7 +244,7 @@ window.onload=function(){
             }else{
                 $e.find("input[name='price']").parent().parent().removeClass('has-error');
             }
-            var num = $e.find("input[name='price']").val();
+            var num = $e.find("input[name='num']").val();
 
             var param = {
                 name:name,
@@ -302,7 +316,7 @@ window.onload=function(){
             }else{
                 $e.find("input[name='price']").parent().parent().removeClass('has-error');
             }
-            var num = $e.find("input[name='price']").val();
+            var num = $e.find("input[name='num']").val();
 
             var param = {
                 name:name,

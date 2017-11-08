@@ -412,6 +412,30 @@ class User extends MY_Controller {
 			}
 			$strRight?$strRight.=",".$strNormaladminRight:$strRight=$strNormaladminRight;
 		}
+
+		//如果当前用户为普通管理员 获取被编辑用户拥有但管理员么有的权限 
+
+		if(!$isadmin && !empty($arrUser['user_right']))
+		{
+			$arrUserEditright = explode(",", $arrUser['user_right']);
+			$arrRight = json_decode($userinfo['right'], true);
+			foreach ($arrUserEditright as $key => $value) {
+				if(!in_array($value, $arrRight) ){
+					$strRight?$strRight.=(",".$value):$strRight.=$value;
+				}
+			}
+			$arrUserEditGroup = explode(",", $arrUser['user_group']);
+			$arrGroup = empty($userinfo['group']) ? array() : explode(",", $userinfo['group']);
+			if(!empty($arrUserEditGroup))
+			{
+				foreach ($arrUserEditGroup as $key => $value) {
+					if(!empty($value) && !in_array($value, $arrGroup) ){
+						$strGroup?$strGroup.=(",".$value):$strGroup.=$value;
+					}
+				}
+			}
+		}
+
 		$arrEdit = array(
 			'user_group' => $strGroup,
 			'user_right' => $strRight,
