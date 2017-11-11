@@ -9,7 +9,7 @@ class Createtemp extends MY_Controller {
 
 	function index()
 	{
-		$this->load->myview("manage/autotemp");
+		$this->load->myview("admin/manage/autotemp");
 	}
 	function creater()
 	{

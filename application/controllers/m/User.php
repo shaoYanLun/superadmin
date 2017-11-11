@@ -80,7 +80,7 @@ class User extends MY_Controller {
 			'all' => $all,
 		));
 
-		$this->load->myview('manage/user', $data);
+		$this->load->myview('admin/manage/user', $data);
 	}
 
 	// 添加用户
@@ -207,7 +207,7 @@ class User extends MY_Controller {
 		foreach ($arrLevel as $key => $value) {
 			$level > $key ? $data['arrlevel'][$key] = $value : "";
 		}
-		$view = $this->load->view("/manage/ajaxadduser", $data, true);
+		$view = $this->load->view("/admin/manage/ajaxadduser", $data, true);
 
 		ajax(1, array('addview' => $view), 'success');
 	}
@@ -232,7 +232,7 @@ class User extends MY_Controller {
 		);
 		$data['_current'] = $arrCurent;
 
-		$this->load->myview("manage/editright", $data);
+		$this->load->myview("/admin/manage/editright", $data);
 	}
 	/*
 		        获取用户可分配权限
@@ -332,7 +332,7 @@ class User extends MY_Controller {
 		//所有目录和权限
 		$jdata['actionAllList'] = $actionAllList;
 		$jdata['arrAllMenuKv'] = $arrAllMenuKv;
-		$view = $this->load->view("manage/ajaxeditrightpage", $jdata, true);
+		$view = $this->load->view("admin/manage/ajaxeditrightpage", $jdata, true);
 
 		$data['view'] = $view;
 

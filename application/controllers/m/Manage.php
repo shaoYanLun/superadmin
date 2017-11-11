@@ -82,7 +82,7 @@ class Manage extends MY_Controller {
         $data['actionlist'] = $actionlist;
         $data['menulist'] = $menulist;
         
-        $this->load->myview('manage/navigation', $data);
+        $this->load->myview('admin/manage/navigation', $data);
     }
 
     // 添加一级目录

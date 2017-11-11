@@ -46,6 +46,6 @@ class Log extends CI_Controller
             'all' => $all
         ));
         
-        $this->load->myview('log/index', $data);
+        $this->load->myview('admin/log/index', $data);
     }
 }

@@ -17,7 +17,7 @@ class Config extends CI_Controller
         
         $data['config'] = $allConfig;
         
-        $this->load->myview("config/index", $data);
+        $this->load->myview("admin/config/index", $data);
     }
 
     // 添加配置

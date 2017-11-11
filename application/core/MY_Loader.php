@@ -25,8 +25,8 @@ class MY_Loader extends CI_Loader {
             '_current'=>$current
         );
 
-        $this->view ( "layer/{$arrLayout['header']}" , $arrHeaderData );
+        $this->view ( "admin/layer/{$arrLayout['header']}" , $arrHeaderData );
         $this->view ( $body,$data);
-        $this->view ( "layer/{$arrLayout['footer']}");
+        $this->view ( "admin/layer/{$arrLayout['footer']}");
     }
 }

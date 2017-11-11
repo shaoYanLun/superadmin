@@ -16,7 +16,7 @@ class Auth extends CI_Controller
         if ($lcode == 1) {
             $data['isDis'] = true;
         }
-        $this->load->view("login/login", $data);
+        $this->load->view("admin/login/login", $data);
     }
 
     function login()

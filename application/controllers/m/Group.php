@@ -13,7 +13,7 @@ class Group extends MY_Controller {
 	function index() {
 		$arrUser = $this->model->getUserGroup();
 		$data['list'] = $arrUser;
-		$this->load->myview('manage/group', $data);
+		$this->load->myview('admin/manage/group', $data);
 	}
     //添加权限组
 	function ajaxAddGroup() {
@@ -101,7 +101,7 @@ class Group extends MY_Controller {
         //所有目录和权限
         $data['actionAllList'] = $actionAllList;
         $data['arrAllMenuKv'] = $arrAllMenuKv;
-        $this->load->myview("manage/groupright", $data);
+        $this->load->myview("admin/manage/groupright", $data);
     }
 
 
