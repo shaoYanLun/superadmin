@@ -81,7 +81,7 @@ function getRand($length = 10, $isup = false, $max = false)
 function gconfig($ckey)
 {
     $ci = & get_instance();
-    $ci->load->model("Config_model");
+    $ci->load->model("admin/Config_model");
     $config = Config_model::getPlatConfig();
     if (! isset($config[$ckey])) {
         return "";

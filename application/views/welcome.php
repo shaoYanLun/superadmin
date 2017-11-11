@@ -17,37 +17,20 @@
 				<h3 class="form-section">说明文档</h3>
 
 				<div class="well">
-
+					<h4>功能尚未完善，项目开发中，问题及需求欢迎叨扰开发者...</h4>
+					<a href="" target="_blank">说明文档</a>
 				</div>
 			</div>
 			<div class="col-md-6">
-				<!-- BEGIN FORM-->
-				<form action="#">
-					<h3 class="form-section">Email</h3>
-					<div class="form-group">
-						<div class="input-icon">
-							<i class="fa fa-check"></i>
-							<input type="text" class="form-control" placeholder="Subject">
-						</div>
-					</div>
-					<div class="form-group">
-						<div class="input-icon">
-							<i class="fa fa-user"></i>
-							<input type="text" class="form-control" placeholder="Name">
-						</div>
-					</div>
-					<div class="form-group">
-						<div class="input-icon">
-							<i class="fa fa-envelope"></i>
-							<input type="password" class="form-control" placeholder="Email">
-						</div>
-					</div>
-					<div class="form-group">
-						<textarea class="form-control" rows="3=6" placeholder=""></textarea>
-					</div>
-					<button type="submit" class="btn green">SEND</button>
-				</form>
-				<!-- END FORM-->
+				<div class="well">
+					<h4>联系开发者</h4>
+					<address>
+					<strong>企鹅</strong><br>
+					 522938260<br>
+					 1030302324<br>
+					 <br>
+					<strong>欢迎进群讨论(企鹅)</strong> 669852173 </address>
+				</div>
 			</div>
 		</div>
 	</div>

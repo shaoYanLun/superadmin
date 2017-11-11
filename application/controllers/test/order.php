@@ -47,11 +47,11 @@ class Order extends MY_Controller
             ajax(-1,null,"参数错误");
         }
         
-        $user = $this->model->testgetUserById($id);
+        $user = $this->model->getUserById($id);
         if (!$user) {
             ajax(-2,null,"切换的用户不存在或者权限太高你无法操作");
         }
-        $this->load->model("user_model");
+        $this->load->model("admin/user_model");
         $this->user_model->wsession($user);
         ajax(1,null,"OK");
     }

@@ -3,7 +3,7 @@
 </div>
 <div class="page-footer">
 	<div class="page-footer-inner">
-		 权限管理系统
+		 权限管理系统 开发中...
 	</div>
 	<div class="scroll-to-top">
 		<i class="icon-arrow-up"></i>

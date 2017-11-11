@@ -52,9 +52,9 @@ class Order_model extends CI_Model
         $ret = $this->_db->query($sql,array($id))->row_array();
         return $ret;
     }
-    function testgetUserById($id) {
-        $sql = "select *from {$this->_strUser} where id=?";
-        $ret = $this->_db->query($sql,array($id))->row_array();
-        return $ret;
-    }
+    // function testgetUserById($id) {
+    //     $sql = "select *from {$this->_strUser} where id=?";
+    //     $ret = $this->_db->query($sql,array($id))->row_array();
+    //     return $ret;
+    // }
 }

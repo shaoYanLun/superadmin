@@ -12,7 +12,7 @@ class Manage extends MY_Controller {
 		checkRightPage();
 
 		$class= $this->router->fetch_class();
-		$this->load->model("{$class}_model" , "model" , true);
+		$this->load->model("admin/{$class}_model" , "model" , true);
 	}
 	/*
 		用户管理相关

@@ -44,7 +44,7 @@ class Config_model extends CI_Model
     public static function getConfigById($id)
     {
         $sql = "select * from " . self::$_strPlatConfig . " where id=?";
-        $config = self::$_db->query($sql)->row_array();
+        $config = self::$_db->query($sql , array($id))->row_array();
         if (! $config) {
             return false;
         }
@@ -54,7 +54,7 @@ class Config_model extends CI_Model
     public static function delConfigById($id)
     {
         $sql = "delete from " . self::$_strPlatConfig . " where id=?";
-        $config = self::$_db->query($sql);
+        $config = self::$_db->query($sql,array($id));
         if (! $config) {
             return false;
         }
@@ -63,13 +63,13 @@ class Config_model extends CI_Model
 
     public static function updateConfigById($w, $data)
     {
-        $ret = $this->_db->update(self::$_strPlatConfig, $data, $w);
+        $ret = self::$_db->update(self::$_strPlatConfig, $data, $w);
         return $ret;
     }
 
     public static function addConfig($arr)
     {
-        $ret = $this->_db->insert(self::$_strPlatConfig, $arr);
+        $ret = self::$_db->insert(self::$_strPlatConfig, $arr);
         return $ret;
     }
 }

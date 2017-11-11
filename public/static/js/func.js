@@ -52,6 +52,10 @@ $(function(){
 	$("#changeselfpwd").click(function(){
 		var $e = $("#changeselfpwdwindow");
 		$e.modal("show");
+		$e.find("input").each(function(){
+			$(this).val("");
+		})
+		$e.find(".save").off();
 		$e.find(".save").click(function(){
 			var oldpwd = $e.find("input[name='oldpwd']").val();
 			if(!oldpwd)

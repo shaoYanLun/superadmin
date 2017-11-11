@@ -48,6 +48,19 @@ class Config extends CI_Controller
         }
         ajax(1, null, "添加成功");
     }
+    function ajaxGetConfig()
+    {
+        $id = $this->input->post('id', true);
+        if ($id == "") {
+            ajax(- 1, null, "参数不能为空");
+        }
+        $this->load->model("admin/Config_model");
+        $config = Config_model::getConfigById($id);
+        if (! $config) {
+            ajax(- 2, null, "你删除的配置不存在");
+        }
+        ajax(1, $config , "success");
+    }
 
     // 删除配置,系统配置不可以删除
     function ajaxDelConfig()
