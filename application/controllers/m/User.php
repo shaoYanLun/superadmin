@@ -370,7 +370,7 @@ class User extends MY_Controller {
 			foreach ($arrResGroup as $key => $value) {
 				$arrGroup[] = $value['id'];
 			}
-			$this->load->model('Manage_model');
+			$this->load->model('admin/Manage_model');
 			$arrLinkRight = $this->Manage_model->getMenuByWhere();
 			$arrRight = array();
 			if (!empty($arrLinkRight)) {
