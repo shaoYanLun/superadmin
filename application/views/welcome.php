@@ -18,7 +18,7 @@
 
 				<div class="well">
 					<h4>功能尚未完善，项目开发中，问题及需求欢迎叨扰开发者...</h4>
-					<a href="" target="_blank">说明文档</a>
+					<a href="http://note.codebooks.cn/admin/" target="_blank">说明文档</a>
 				</div>
 			</div>
 			<div class="col-md-6">
