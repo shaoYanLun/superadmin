@@ -26,7 +26,7 @@
 					<h4>联系开发者</h4>
 					<address>
 					<strong>企鹅</strong><br>
-					 522938260<br>
+					 2101834597<br>
 					 1030302324<br>
 					 <br>
 					<strong>欢迎进群讨论(企鹅)</strong> 669852173 </address>
