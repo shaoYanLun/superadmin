@@ -16,6 +16,7 @@ echo $_current['mname'];
 </div>
 <div class="note note-success">
     <p>
+        商品页面，添加商品，编辑，下架，删除，都可以配置单独的权限，后台简单调用权限接口，每个按钮和文字都可以控制，并在后台管理中给其他人配置操作权限。
     </p>
 </div>
 <div class="row">

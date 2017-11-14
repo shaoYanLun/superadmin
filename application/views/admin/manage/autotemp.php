@@ -15,7 +15,11 @@ echo $_current['mname'];
         </li>
     </ul>
 </div>
-
+<div class="note note-success">
+    <p>
+        此功能可以直接根据数据表生成可访问列表，controller,model,view一应生成相应的列表查询，后期会增加复杂sql生成，省去编写页面的时间。同时会增加页面的增删改查。这样的话，你不用开发就可以实现数据库的简单操作和后台列表
+    </p>
+</div>
 <div class="row">
     <div class="col-md-6">
         <div class="form" id="createform">

@@ -13,8 +13,7 @@ class Goods extends MY_Controller
     }
     function index(){
     	//权限判断
-    	$currentFunc = $this->rabc->getCurrentFunc();
-    	checkRightPage($currentFunc);
+    	checkRightPage("/test/goods/index");
 
     	$this->load->library('page');
 

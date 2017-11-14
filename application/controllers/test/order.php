@@ -13,8 +13,7 @@ class Order extends MY_Controller
     }
     function index(){
     	//权限判断
-    	$currentFunc = $this->rabc->getCurrentFunc();
-    	checkRightPage($currentFunc);
+    	checkRightPage("/test/order/index");
     	$arrWhere = $this->input->get(null, true);
     	$this->load->library('page');
 

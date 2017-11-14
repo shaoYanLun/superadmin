@@ -16,6 +16,7 @@ echo $_current['mname'];
 </div>
 <div class="note note-success">
     <p>
+        为方便测试 ，下面添加了切换用户功能，后台管理中配置了权限，可以通过这里切换用户来测试权限功能。正式环境需删除功能。
     </p>
 </div>
 <div class="row">
