@@ -150,6 +150,9 @@ class User extends MY_Controller {
 
 	// 用户自己修改密码
 	function ajaxChangePwd() {
+		
+		checkRightPage();
+
 		$user = checkLogin();
 		if (!$user) {
 			ajax(-1, null, "请先登录");
