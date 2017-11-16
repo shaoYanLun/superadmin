@@ -52,7 +52,7 @@ echo $_current['mname'];
                         <th>请求标题</th>
                         <th>说明</th>
                         <?php
-                        if(!checkRight("superadmin"))
+                        if(checkRight("superadmin"))
                         {
                             echo "<th>ip</th>";
                         }
@@ -76,7 +76,7 @@ echo $_current['mname'];
                     
                     </td>
                     <?php
-                    if(!checkRight("superadmin"))
+                    if(checkRight("superadmin"))
                     {
                     ?>
                     <td><?php echo $value['ip'];?></td>
