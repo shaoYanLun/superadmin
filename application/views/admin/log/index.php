@@ -51,7 +51,12 @@ echo $_current['mname'];
                         <th>请求url</th>
                         <th>请求标题</th>
                         <th>说明</th>
-                        <th>ip</th>
+                        <?php
+                        if(!checkRight("superadmin"))
+                        {
+                            echo "<th>ip</th>";
+                        }
+                        ?>
                         <th>时间</th>
                     </tr>
                     </thead>
@@ -70,7 +75,15 @@ echo $_current['mname'];
                     <?php endif;?>
                     
                     </td>
+                    <?php
+                    if(!checkRight("superadmin"))
+                    {
+                    ?>
                     <td><?php echo $value['ip'];?></td>
+                    <?php
+                    }
+                    ?>
+                    
                     <td><?php echo $value['ctime'];?></td>
                     </tr>
                     <?php endforeach;?>
