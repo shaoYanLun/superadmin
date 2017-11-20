@@ -23,12 +23,11 @@
 			</div>
 			<div class="col-md-6">
 				<div class="well">
-					<h4>联系开发者</h4>
+					<h4>点击加群</h4>
 					<address>
-					<strong>企鹅</strong><br>
-					 2101834597<br>
-					 1030302324<br>
-					 <br>
+					<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=7afc186a1fc8d364c2f7b9e0b184df09fc43fe1fd881da33057bb497e4ef356b"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="gophper" title="gophper"></a>
+					<br>
+					<br>
 					<strong>欢迎进群讨论(企鹅)</strong> 669852173 </address>
 				</div>
 			</div>
