@@ -42,7 +42,7 @@ class User_model extends CI_Model
         $insertData['user_level'] = $arr['user_level'];
         $insertData['salt'] = getRand(16);
         $insertData['password'] = password($arr['pwd'], $insertData['salt']);
-        $insertData['gcode'] = mt_rand(10000000, 99999999);
+        $insertData['gcode'] = getBase32Rand();
         $insertData['ctime'] = date("Y-m-d H:i:s");
         $insertData['mtime'] = date("Y-m-d H:i:s");
         $isS = $this->_db->insert($this->_strUser, $insertData);

@@ -167,3 +167,37 @@ function gor($msg = "", $go = "")
         redirect($go);
     }
 }
+function getBase32Rand($num = 10)
+{
+    $str = "abcdefghijklmnopqrstuvwxyz1234567890";
+    $randStr = "";
+    for ($i=0; $i < $num ; $i++) { 
+        $randStr.=$str[ mt_rand(0,strlen($str)-1)];
+    }
+    return base32_encode($randStr);
+}
+function base32_encode($input) {  
+    $BASE32_ALPHABET = 'abcdefghijklmnopqrstuvwxyz234567';  
+    $output = '';  
+    $v = 0;  
+    $vbits = 0;  
+  
+    for ($i = 0, $j = strlen($input); $i < $j; $i++) {  
+        $v <<= 8;  
+        $v += ord($input[$i]);  
+        $vbits += 8;  
+  
+        while ($vbits >= 5) {  
+            $vbits -= 5;  
+            $output .= $BASE32_ALPHABET[$v >> $vbits];  
+            $v &= ((1 << $vbits) - 1);  
+        }  
+    }  
+  
+    if ($vbits > 0) {  
+        $v <<= (5 - $vbits);  
+        $output .= $BASE32_ALPHABET[$v];  
+    }
+  
+    return $output;  
+}  
